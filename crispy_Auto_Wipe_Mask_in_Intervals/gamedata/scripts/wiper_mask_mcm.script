@@ -1,0 +1,116 @@
+-- Настройки по умолчанию
+local DEFAULT_INTERVAL = 4500
+local MCM_ID = "wiper_mask_mcm"
+local DEFAULT_KEY = DIK_keys.DIK_H
+local MODE_PRESS, MODE_DOUBLE_TAP, MODE_HOLD = 0, 1, 2
+local keybind, modifier, mode = DEFAULT_KEY, 0, MODE_PRESS
+
+-- Звук переключателя тумблера
+local snd_switch = sound_object([[interface\inv_torch]])
+
+-- Состояние дворников
+wipers_active = false
+local last_wipe_time = 0
+
+-- Функция получения интервала из MCM (возвращает миллисекунды)
+local function get_wiper_interval()
+    if ui_mcm then
+        return ui_mcm.get("wiper_mask_mcm/interval") * 1000
+    end
+    return DEFAULT_INTERVAL
+end
+
+-- Вызов оригинального протирания из actor_effects
+local function force_wipe_mask()
+    if actor_effects and actor_effects.Hit_MaskCleaning then
+        actor_effects.Hit_MaskCleaning()
+    end
+end
+
+-- Циклический апдейт
+function actor_on_update()
+    if not wipers_active then return end
+
+    local tg = time_global()
+    local current_interval = get_wiper_interval()
+
+    if tg > last_wipe_time + current_interval then
+        last_wipe_time = tg
+        force_wipe_mask()
+    end
+end
+
+-- Обработка нажатия кнопки
+local function toggle_wipers()
+    if not db.actor then return end
+
+    wipers_active = not wipers_active
+    if snd_switch then
+        snd_switch:play(db.actor, 0, sound_object.s2d)
+    end
+
+    if wipers_active then
+        last_wipe_time = time_global()
+        actor_menu.set_msg(1, game.translate_string("st_wiper_mask_enabled"), 2)
+    else
+        actor_menu.set_msg(1, game.translate_string("st_wiper_mask_disabled"), 2)
+    end
+end
+
+local function on_option_change()
+    keybind = ui_mcm.get(MCM_ID .. "/key") or DEFAULT_KEY
+    modifier = ui_mcm.get(MCM_ID .. "/modifier") or 0
+    mode = ui_mcm.get(MCM_ID .. "/mode") or MODE_PRESS
+end
+
+local function matches_keybind(key)
+    return key == keybind and keybind > 0 and keybind ~= DIK_keys.DIK_ESCAPE
+        and (not ui_mcm or ui_mcm.get_mod_key(modifier))
+end
+
+function on_key_press(key)
+    if not matches_keybind(key) then return end
+
+    if mode == MODE_PRESS
+        or (mode == MODE_DOUBLE_TAP and ui_mcm.double_tap(MCM_ID, key)) then
+        toggle_wipers()
+    end
+end
+
+local function on_key_hold(key)
+    if mode == MODE_HOLD and matches_keybind(key) and ui_mcm.key_hold(MCM_ID, key) then
+        toggle_wipers()
+    end
+end
+
+-- Функция для MCM, полностью завязанная на созданный ui_st_ файл локализации
+function on_mcm_load()
+    local op = {
+        id = MCM_ID,
+        sh = true,
+        gr = {
+            { id = "title", type = "slide", link = "ui_options_slider_player", text = "ui_mcm_title_wiper_mask_mcm", size = {512,50}, spacing = 20 },
+            { id = "help", type = "desc", text = "ui_mcm_wiper_mask_mcm_help" },
+            { id = "key", type = "key_bind", val = 2, def = DEFAULT_KEY },
+            { id = "modifier", type = "radio_h", val = 2, def = 0, hint = "mcm_kb_modifier", content = {
+                {0, "mcm_kb_mod_none"}, {1, "mcm_kb_mod_shift"}, {2, "mcm_kb_mod_ctrl"}, {3, "mcm_kb_mod_alt"}
+            }},
+            { id = "mode", type = "radio_h", val = 2, def = MODE_PRESS, hint = "mcm_kb_mode", content = {
+                {MODE_PRESS, "mcm_kb_mode_press"}, {MODE_HOLD, "mcm_kb_mode_hold"}, {MODE_DOUBLE_TAP, "mcm_kb_mode_dtap"}
+            }},
+            { id = "interval", type = "track", val = 2, min = 2, max = 60, step = 1, def = 4 }
+        }
+    }
+    return op
+end
+
+-- Регистрация коллбэков в игре
+function on_game_start()
+    RegisterScriptCallback("actor_on_update", actor_on_update)
+    RegisterScriptCallback("on_key_press", on_key_press)
+    if ui_mcm then
+        on_option_change()
+        RegisterScriptCallback("on_option_change", on_option_change)
+        RegisterScriptCallback("on_key_hold", on_key_hold)
+    end
+end

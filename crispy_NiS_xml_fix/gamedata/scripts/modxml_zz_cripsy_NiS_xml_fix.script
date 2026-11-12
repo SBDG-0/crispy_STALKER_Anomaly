@@ -1,0 +1,24 @@
+local installed = false
+local broken_bullet = string.char(239, 191, 189)
+local bullet = string.char(149) -- Bullet in the game's Windows-1251 font encoding.
+
+local function install_faction_bullets()
+    if installed then return end
+
+    local class = ui_mm_faction_select.UINewGame
+    local original_update = class.UpdateDescr
+    class.UpdateDescr = function(self, ...)
+        original_update(self, ...)
+        local text = self.text_relations:GetText()
+        local fixed, count = text:gsub(broken_bullet, bullet)
+        if count > 0 then
+            self.text_relations:SetText(fixed)
+            self.text_relations:AdjustHeightToText()
+        end
+    end
+    installed = true
+end
+
+function on_xml_read()
+    RegisterScriptCallback("main_menu_on_init", install_faction_bullets)
+end

@@ -1,0 +1,61 @@
+-- Load Ready Lite: one notification per loading screen; no files are written.
+-- Requires the Modded Exes loading-screen callback bridge.
+-- Edit these two values to change the sound or volume (0 to 1).
+local SOUND = "load_ready_lite\\ready"
+local VOLUME = 0.85
+
+local registered, notified = false, false
+local generation = 0
+local cue
+
+local function reset()
+    generation = generation + 1
+    notified = false
+    if cue then pcall(function() cue:stop() end) end
+    cue = nil
+end
+
+local function actor_changed(obj)
+    if obj and obj:clsid() == clsid.actor then reset() end
+end
+
+local function ready()
+    if notified then return end
+    notified = true
+    if VOLUME <= 0 then return end
+    local token = generation
+    local started = device():time_continual()
+    -- The prompt can arrive at precache frame 2, while audio is still muted.
+    -- This finite call waits for audio to return, even at the paused key prompt.
+    level.add_call(function()
+        if token ~= generation then return true end
+        local elapsed = (device():time_continual() - started) % 4294967296
+        if elapsed >= 60000 then return true end
+        if device().precache_frame ~= 0 then return false end
+        local ok, err = pcall(function()
+            cue = sound_object(SOUND)
+            cue:play_at_pos(nil, vector():set(0, 0, 0), 0, sound_object.s2d)
+            cue.volume = math.min(1, math.max(0, VOLUME))
+        end)
+        if not ok and type(printf) == "function" then
+            printf("[Load Ready Lite] Sound could not play: %s", tostring(err))
+        end
+        return true
+    end, function() end)
+end
+
+function on_game_start()
+    if registered then return end
+    if type(rawget(_G, "OnLoadingScreenKeyPrompt")) ~= "function" then
+        if type(printf) == "function" then
+            printf("[Load Ready Lite] Loading-screen callback unavailable; disabled.")
+        end
+        return
+    end
+    RegisterScriptCallback("on_loading_screen_key_prompt", ready)
+    RegisterScriptCallback("on_game_load", reset)
+    RegisterScriptCallback("main_menu_on_init", reset)
+    RegisterScriptCallback("game_object_on_net_spawn", actor_changed)
+    RegisterScriptCallback("game_object_on_net_destroy", actor_changed)
+    registered = true
+end

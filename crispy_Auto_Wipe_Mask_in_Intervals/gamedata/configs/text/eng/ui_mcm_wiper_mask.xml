@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<string_table>
+    <string id="ui_mcm_menu_wiper_mask_mcm">
+        <text>Mask Wiping</text>
+    </string>
+    <string id="ui_mcm_title_wiper_mask_mcm">
+        <text>Automatic Mask Wiping</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_help">
+        <text>Use the configured keybind in game to toggle automatic mask wiping.</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_key">
+        <text>Toggle Automatic Mask Wiping</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_key_desc">
+        <text>Key used to switch automatic mask wiping on or off.</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_interval">
+        <text>Wipe Interval (seconds)</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_interval_desc">
+        <text>Time between wipes while automatic mask wiping is on.</text>
+    </string>
+    <string id="st_wiper_mask_enabled">
+        <text>Automatic mask wiping enabled.</text>
+    </string>
+    <string id="st_wiper_mask_disabled">
+        <text>Automatic mask wiping disabled.</text>
+    </string>
+</string_table>

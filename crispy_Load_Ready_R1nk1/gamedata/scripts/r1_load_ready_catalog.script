@@ -1,0 +1,197 @@
+-- Load Ready 1.3.0. Only names/policies are distributed, not game audio.
+-- Paths returned by X-Ray's VFS are relative to $game_sounds$.
+CUSTOM_DIR = "r1_load_ready\\custom\\"
+FIRST_ID = "pas_b400_vano_about_dome_1_pda"
+VOICE_IDS = {
+    "zat_b7_raiders_ready_to_go_pda",
+    "pas_b400_vano_about_gates_pda",
+    "pas_b400_zulus_about_gates_pda",
+    "pas_b400_sokolov_about_gates_pda",
+    "pas_b400_wanderer_about_gates_pda",
+    "pri_a28_colonel_wait_actor_return_pda",
+    "pri_a28_colonel_wait_actor_long_pda",
+    "pri_a28_colonel_wait_actor_go_pda",
+    "pri_a17_recon_squad_sniper_out_pda",
+    "pri_a17_recon_squad_after_monolith_clear_pda",
+    "jup_b6_stalker_1_second_measurement_done_pda",
+    "jup_b6_stalker_1_monsters_coming_5_pda",
+    "jup_b6_stalker_1_monsters_coming_3_pda",
+    "jup_b6_stalker_1_first_measurement_done_pda",
+    "jup_b4_monolith_squad_leader_meet_pda",
+    "jup_b19_freedom_yar_come_here_3_pda",
+    "jup_b19_freedom_yar_come_here_1_pda",
+    "jup_b19_freedom_yar_come_here_2_pda",
+    "jup_a12_merc_ready_pda",
+    "esc_railroadpost_yes_2_pda",
+    "wait_help_1_pda", "wait_help_2_pda", "wait_help_3_pda",
+    "wait_counter_3_pda", -- appears twice in the brief: one entry, no extra weight
+    "wait_again_3_pda", "wait_again_1_pda", "wait_again_2_pda",
+    "found_enemy_1_pda", -- bandit voice folders excluded below
+    "actor_in_battle_1_pda", "wait_signal_2_pda", "actor_come_1_pda",
+    "wait_signal_3_pda", "jup_b47_merc_leader_regret_pda",
+    "pas_b400_sokolov_come_back_1_pda",
+    "pas_b400_sokolov_about_tushkano_1_pda",
+    "pas_b400_vano_about_anomaly_second_3_pda",
+    "pas_b400_vano_come_back_1_pda", "pas_b400_vano_about_cover_1_pda",
+}
+PDA_IDS = {"pda_welcome", "pda_objective", "pda_sos", "pda_guide_2", "pda_news"}
+local function set(values)
+    local out = {}
+    for _, v in ipairs(values) do out[v] = true end
+    return out
+end
+local voice_ids, pda_ids = set(VOICE_IDS), set(PDA_IDS)
+local traders = set({1, 4, 6, 8, 9})
+local generic_meet = set({2, 6, 8, 9})
+-- Exact voice folder + exact states/meet path, NOT a basename-wide expansion.
+local faction_meet = {
+    greh_3 = set({1, 2, 3, 4, 5, 6}), greh_1 = set({12, 9}),
+    freedom_3 = set({9, 8}), ecolog_3 = set({2, 9, 8, 6}),
+    dolg_3 = set({9, 8, 1, 2}), build_3 = set({5, 6, 1, 3}),
+    bandit_4 = set({9, 3, 8, 13}),
+}
+local restricted_family = set({"greh", "freedom", "ecolog", "dolg", "build", "bandit"})
+
+function normalise(path)
+    if type(path) ~= "string" then return nil end
+    path = path:match("^%s*(.-)%s*$"):gsub("/", "\\"):lower()
+    if path == "" or path:find(":", 1, true) or path:sub(1, 1) == "\\"
+        or path:find("..", 1, true) or path:find("%z") then return nil end
+    return (path:gsub("%.ogg$", ""))
+end
+
+function empty()
+    return { first = {}, voices = {}, extra = {}, pda = {}, pda_named = {},
+        radio = {}, custom = {}, jokes = {}, blowout = {}, seen = {}, listed = 0 }
+end
+
+local function add(cat, bucket, path, name)
+    local key = bucket .. ":" .. path
+    if cat.seen[key] then return end
+    cat.seen[key] = true
+    cat[bucket][#cat[bucket] + 1] = {path = path, kind = bucket}
+end
+
+function ingest(cat, raw_path)
+    if type(raw_path) ~= "string" or not raw_path:lower():match("%.ogg$") then return end
+    local path = normalise(raw_path)
+    if not path then return end
+    local name = path:match("([^\\]+)$")
+    if not name then return end -- reject a bare .ogg with no stem
+    -- Custom sounds are a separate namespace. Even a file named pda_welcome,
+    -- blowout or Vano's first line must not leak into the other modes.
+    if path:sub(1, #CUSTOM_DIR) == CUSTOM_DIR then
+        add(cat, "custom", path, name)
+        return
+    end
+    local human_voice = path:match("^characters_voice\\human\\([^\\]+)\\")
+    local is_voice = path:sub(1, 17) == "characters_voice\\"
+    if name == FIRST_ID and is_voice then
+        add(cat, "first", path, name)
+        return -- never admitted to any random pool
+    end
+    if voice_ids[name] and is_voice then
+        if name ~= "found_enemy_1_pda" or not path:find("bandit", 1, true) then
+            add(cat, "voices", path, name)
+        end
+    end
+    if pda_ids[name] then
+        add(cat, "pda", path, name)
+        cat.pda_named[name] = cat.pda_named[name] or {}
+        local t = cat.pda_named[name]
+        local exists = false
+        for _, e in ipairs(t) do if e.path == path then exists = true end end
+        if not exists then t[#t + 1] = {path = path, kind = "pda"} end
+    end
+    if name == "blowout" then add(cat, "blowout", path, name) end
+    if path:sub(1, 6) == "radio\\" then
+        local banned = false
+        local folders = path:match("^(.*)\\[^\\]+$") or ""
+        for component in folders:gmatch("[^\\]+") do
+            if component == "_channel_1_session" or component == "_channel_2_session" then
+                banned = true
+            end
+        end
+        if not banned then add(cat, "radio", path, name) end
+    end
+    if human_voice then
+        -- Only the leading joke_ prefix; never intro_joke_, reaction_joke_, etc.
+        -- Exclude woman voice folders even when a voice addon gives them a suffix.
+        if name:match("^joke_.+") and path:find("\\talk\\jokes\\", 1, true)
+            and not human_voice:find("woman", 1, true) then
+            add(cat, "jokes", path, name)
+        end
+        local number = tonumber(name:match("^trader_wait_(%d+)$"))
+        if number and traders[number] then add(cat, "extra", path, name) end
+        number = tonumber(name:match("^meet_wait_(%d+)$"))
+        if number and path == "characters_voice\\human\\" .. human_voice ..
+            "\\states\\meet\\" .. name then
+            local allowed = faction_meet[human_voice]
+            local family = human_voice:match("^(.-)_%d+$") or human_voice
+            if (allowed and allowed[number]) or
+                (not restricted_family[family] and generic_meet[number]) then
+                add(cat, "extra", path, name)
+            end
+        end
+    end
+end
+
+function scan(log)
+    local cat = empty()
+    local list
+    local ok, err = pcall(function()
+        -- No FS_RootOnly: packed subdirectories are included. No disk rescan/unpack.
+        list = getFS():file_list_open("$game_sounds$", FS.FS_ListFiles)
+        local count = list:Size()
+        cat.listed = count
+        for i = 0, count - 1 do ingest(cat, list:GetAt(i)) end
+    end)
+    if list then pcall(function() list:Free() end) end
+    if not ok and log then log("VFS_SCAN_ERROR " .. tostring(err), true) end
+    for _, bucket in ipairs({"first", "voices", "extra", "pda", "radio", "custom", "jokes", "blowout"}) do
+        table.sort(cat[bucket], function(a, b) return a.path < b.path end)
+    end
+    return cat
+end
+
+local function append(out, entries)
+    for _, e in ipairs(entries or {}) do out[#out + 1] = e end
+end
+
+function pool(cat, opts)
+    local out = {}
+    if opts.mode == 1 then
+        append(out, cat.voices)
+        if opts.extra_voice then append(out, cat.extra) end
+    elseif opts.mode == 2 then
+        if opts.pda_choice == 0 then append(out, cat.pda)
+        else append(out, cat.pda_named[PDA_IDS[opts.pda_choice]]) end
+    elseif opts.mode == 3 then
+        for _, e in ipairs(cat.radio) do
+            local allowed = true
+            local folders = e.path:match("^(.*)\\[^\\]+$") or ""
+            for component in folders:gmatch("[^\\]+") do
+                if component == "_channel_1" and not opts.radio_channel_1 then allowed = false end
+                if component == "_channel_2" and not opts.radio_channel_2 then allowed = false end
+                if component == "_playlist_1" and not opts.radio_playlist_1 then allowed = false end
+            end
+            if allowed then out[#out + 1] = e end
+        end
+    elseif opts.mode == 4 then
+        append(out, cat.custom)
+    end
+    if opts.jokes then append(out, cat.jokes) end
+    return out
+end
+
+function choose(entries, previous, random)
+    local n = #entries
+    if n == 0 then return nil end
+    if n == 1 then return entries[1] end
+    local old
+    for i, e in ipairs(entries) do if e.path == previous then old = i; break end end
+    local index = random(1, old and n - 1 or n)
+    if old and index >= old then index = index + 1 end
+    return entries[index]
+end
+

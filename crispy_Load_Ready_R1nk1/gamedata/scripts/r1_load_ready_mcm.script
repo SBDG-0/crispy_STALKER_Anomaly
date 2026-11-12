@@ -1,0 +1,36 @@
+-- Load Ready 1.4.0. No ui_mcm.get() during tree construction.
+function on_mcm_load()
+    local d = r1_load_ready_settings.defaults
+    return {id="r1_load_ready", sh=true, gr={
+        -- Intentionally the very first control, before sound options.
+        {id="entry_mode", type="radio_v", val=2, def=d.entry_mode,
+            content={{0,"r1_lr_wait"},{1,"r1_lr_auto"}}},
+        {id="enabled", type="check", val=1, def=d.enabled},
+        {id="mode", type="radio_v", val=2, def=d.mode,
+            content={{1,"r1_lr_voice"},{2,"r1_lr_pda"},{3,"r1_lr_radio"},{4,"r1_lr_custom"}}},
+        {id="volume", type="track", val=2, def=d.volume, min=0, max=1, step=0.05},
+        {id="voice_title", type="title", align="l", text="ui_mcm_r1_load_ready_voice_title"},
+        {id="extra_voice", type="check", val=1, def=d.extra_voice},
+        {id="first_desc", type="desc", text="ui_mcm_r1_load_ready_first_desc"},
+        {id="pda_choice", type="list", val=2, def=d.pda_choice,
+            content={{0,"r1_lr_random"},{1,"r1_lr_pda_welcome"},{2,"r1_lr_pda_objective"},
+                {3,"r1_lr_pda_sos"},{4,"r1_lr_pda_guide_2"},{5,"r1_lr_pda_news"}}},
+        {id="radio_title", type="title", align="l", text="ui_mcm_r1_load_ready_radio_title"},
+        {id="radio_channel_1", type="check", val=1, def=d.radio_channel_1},
+        {id="radio_channel_2", type="check", val=1, def=d.radio_channel_2},
+        {id="radio_playlist_1", type="check", val=1, def=d.radio_playlist_1},
+        {id="radio_tail", type="track", val=2, def=d.radio_tail, min=0, max=30, step=1},
+        {id="radio_limit", type="track", val=2, def=d.radio_limit, min=5, max=300, step=5},
+        {id="radio_desc", type="desc", text="ui_mcm_r1_load_ready_radio_desc"},
+        {id="custom_title", type="title", align="l", text="ui_mcm_r1_load_ready_custom_title"},
+        {id="custom_playback", type="list", val=2, def=d.custom_playback,
+            content={{0,"r1_lr_custom_random"},{1,"r1_lr_custom_all"}}},
+        {id="custom_stop_on_entry", type="check", val=1, def=d.custom_stop_on_entry},
+        {id="custom_desc", type="desc", text="ui_mcm_r1_load_ready_custom_desc"},
+        {id="common_title", type="title", align="l", text="ui_mcm_r1_load_ready_common_title"},
+        {id="jokes", type="check", val=1, def=d.jokes},
+        {id="screamer", type="check", val=1, def=d.screamer},
+        {id="screamer_sound", type="input", val=0, def=d.screamer_sound},
+        {id="debug", type="check", val=1, def=d.debug},
+    }}
+end

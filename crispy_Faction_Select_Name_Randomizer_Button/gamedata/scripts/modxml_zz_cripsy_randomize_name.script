@@ -1,0 +1,84 @@
+local FACTION_XML = {
+    [ [[ui\ui_mm_faction_select.xml]] ] = true,
+    [ [[ui\ui_mm_faction_select_16.xml]] ] = true,
+    [ [[ui\ui_mm_faction_select_21.xml]] ] = true,
+}
+
+local BUTTON = "btn_cripsy_randomize_name"
+local BUTTON_PATH = "main_dialog:" .. BUTTON
+local controls_hook_installed = false
+
+local function add_name_button(file_name, xml)
+    if not FACTION_XML[file_name] then return end
+
+    local dialog = xml:query("main_dialog")[1]
+    local input = xml:query("main_dialog > input_name")[1]
+    local random = xml:query("main_dialog > btn_random")[1]
+    if not (dialog and input and random) then return end
+    if xml:query("main_dialog > " .. BUTTON)[1] then return end
+
+    local field = xml:getElementAttr(input)
+    local style = xml:getElementAttr(random)
+    local x, y = tonumber(field.x), tonumber(field.y)
+    local width, height = tonumber(field.width), tonumber(field.height)
+    local random_width, button_height = tonumber(style.width), tonumber(style.height)
+    if not (x and y and width and height and random_width and button_height) then return end
+
+    local button_width = random_width * 0.8
+    local gap = random_width * 0.06
+    local field_width = width - button_width - gap
+    if field_width <= 0 then return end
+
+    local button_xml = ([=[
+        <%s x="%g" y="%g" width="%g" height="%g" stretch="1">
+            <text y="1" r="150" g="150" b="150" align="c" vert_align="c" font="letterica18">st_mm_btn_new_game_rand</text>
+            <texture>ui_inGame2_button</texture>
+        </%s>
+    ]=]):format(BUTTON, x + field_width + gap, y + (height - button_height) / 2,
+        button_width, button_height, BUTTON)
+
+    if xml:insertFromXMLString(button_xml, dialog) then
+        xml:setElementAttr(input, {width = field_width})
+    end
+end
+
+local function randomize_name(dialog)
+    if not dialog.access then return end
+
+    -- Match the name step of UINewGame:OnRandomize using the current faction.
+    local faction = dialog.selected_faction
+    local subset
+    if faction == "army" or faction == "dolg" or faction == "isg" then
+        subset = random_choice("private", "sergeant", "senior_sergeant", "lieutenant", "captain")
+    else
+        subset = random_choice("stalker", "bandit", "science")
+    end
+
+    local section = "stalker_names_" .. subset
+    local name_count = ini_sys:r_float_ex(section, "name_cnt")
+    local last_name_count = ini_sys:r_float_ex(section, "last_name_cnt")
+    local first_name = game.translate_string(strformat("name_%s_%s", subset, math.random(0, name_count - 1)))
+    local last_name = game.translate_string(strformat("lname_%s_%s", subset, math.random(0, last_name_count - 1)))
+    dialog.character_name:SetText(first_name .. " " .. last_name)
+end
+
+local function install_controls_hook()
+    if controls_hook_installed then return end
+
+    local class = ui_mm_faction_select.UINewGame
+    local original_callbacks = class.Main_CallBacks
+    class.Main_CallBacks = function(self, ...)
+        original_callbacks(self, ...)
+        if not self.xml:NodeExist(BUTTON_PATH, 0) then return end
+
+        local button = self.xml:Init3tButton(BUTTON_PATH, self.dialog)
+        self:Register(button, BUTTON)
+        self:AddCallback(BUTTON, ui_events.BUTTON_CLICKED, randomize_name, self)
+    end
+    controls_hook_installed = true
+end
+
+function on_xml_read()
+    RegisterScriptCallback("on_xml_read", add_name_button)
+    RegisterScriptCallback("main_menu_on_init", install_controls_hook)
+end

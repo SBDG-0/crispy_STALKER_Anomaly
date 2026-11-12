@@ -1,0 +1,123 @@
+-- Load Ready 1.4.0 | automatic-entry compatibility bridge.
+-- Legacy filename kept for clean upgrades from 1.2/1.3.
+-- NO key simulation, NO DLL, NO FFI, NO input hooks.
+--
+-- Why this exists:
+-- Modded Exes builds before the upstream 2026-07-15 fix can skip
+-- OnLoadingScreenDismissed when keypress_on_start=0. GAMMA's Interaction
+-- Dot Marks (and potentially other addons) uses that callback for final startup.
+-- The engine has already entered gameplay at this point, so if the real callback
+-- is missing we reproduce ONLY that missing callback once on the next safe frame.
+local job
+local logger = function() end
+local repairing = false
+local REPAIR_DELAY_MS = 80
+local TIMEOUT_MS = 10000
+
+local function log(s) logger(s, true) end
+local function now_ms() return device():time_continual() end
+local function elapsed(now, before)
+    local delta = now - before
+    return delta < 0 and delta + 4294967296 or delta
+end
+
+local function set_wait(value)
+    local ok, err = pcall(function()
+        get_console():execute("keypress_on_start " .. (value and "1" or "0"))
+    end)
+    if not ok then log("ENTRY_OPTION_ERROR " .. tostring(err)) end
+    return ok
+end
+
+function prepare(log_fn, opts)
+    if type(log_fn) == "function" then logger = log_fn end
+end
+
+function cancel(reason)
+    if job then log("AUTO_REPAIR_CANCEL " .. tostring(reason or "cancelled")) end
+    job = nil
+end
+
+function dismissed()
+    local j = job
+    job = nil
+    if not j then return end
+    if repairing then
+        log("AUTO_DISMISS_REPAIRED missing engine callback supplied once")
+    else
+        log("AUTO_DISMISS_NATIVE engine callback observed; repair not needed")
+    end
+end
+
+local function finish(j, msg)
+    if job == j then job = nil end
+    if msg then log(msg) end
+    return true
+end
+
+local function tick(j)
+    if job ~= j then return true end
+    local d = device()
+    local now = now_ms()
+    if elapsed(now, j.created) >= TIMEOUT_MS then
+        return finish(j, "AUTO_REPAIR_TIMEOUT; gameplay already entered")
+    end
+    if d.precache_frame ~= 0 then
+        j.ready_at, j.ready_frame = nil, nil
+        return false
+    end
+    if not j.ready_at then
+        j.ready_at, j.ready_frame = now, d.frame
+        return false
+    end
+    if elapsed(now, j.ready_at) < REPAIR_DELAY_MS or elapsed(d.frame, j.ready_frame) < 1 then
+        return false
+    end
+
+    -- A modern engine fires the real callback synchronously after the key-prompt
+    -- callback, so dismissed() clears this job before this watchdog runs.
+    local cb = rawget(_G, "OnLoadingScreenDismissed")
+    if type(cb) ~= "function" then
+        return finish(j, "AUTO_REPAIR_UNAVAILABLE OnLoadingScreenDismissed missing")
+    end
+
+    repairing = true
+    local ok, err = pcall(cb)
+    repairing = false
+    if not ok then
+        return finish(j, "AUTO_REPAIR_ERROR " .. tostring(err))
+    end
+    -- Normally our registered callback cleared it through dismissed().
+    if job == j then
+        return finish(j, "AUTO_DISMISS_REPAIR_SENT (no local acknowledgement)")
+    end
+    return true
+end
+
+function begin(opts)
+    cancel("new readiness event")
+    if not opts.enabled or opts.entry_mode ~= 1 then return end
+
+    -- The engine has already selected its no-wait branch before this Lua callback.
+    -- Restore the persistent cvar immediately so uninstall/crash leaves safe manual
+    -- behavior. on_game_load/actor spawn will arm 0 again for the next auto load.
+    set_wait(true)
+
+    local j = {created = now_ms()}
+    job = j
+    local ok, err = pcall(function()
+        level.add_call(function()
+            local success, done = pcall(tick, j)
+            if not success then
+                return finish(j, "AUTO_REPAIR_ERROR " .. tostring(done))
+            end
+            return done == true
+        end, function() end)
+    end)
+    if not ok then
+        job = nil
+        log("AUTO_REPAIR_SCHEDULE_ERROR " .. tostring(err))
+        return
+    end
+    log("AUTO_ENTRY no-wait branch selected; dismissed-callback watchdog armed")
+end

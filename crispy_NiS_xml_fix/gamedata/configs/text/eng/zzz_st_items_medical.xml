@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="windows-1251"?>
+
+<!--
+	Medical Items + Drugs
+-->
+
+<string_table>
+	<string id="st_surginst">
+		<text>CMS surgical kit</text>
+	</string>
+	<string id="st_surginst_descr">
+		<text>Compact surgical kit for treatment of bullet wounds and other serious injuries. Due to the rather basic and unsterile nature of these 
+			tools, a bandage is required to prevent bleeding during use.\n \n
+			%c[0,255,255,255]PROPERTIES:\n		
+			%c[d_blue] • %c[ui_gray_2] basic kit to recover bodyparts\n
+			%c[d_blue] • %c[ui_gray_2] bandage is required to use\n
+			%c[d_blue] • %c[ui_gray_2] splint is required after use\n
+			%c[d_blue] • %c[ui_gray_2] crafting item\n
+			%c[d_blue] • %c[ui_gray_2] Low quality\n
+			%c[d_red] • %c[ui_gray_2] slow usage (field kit)\n
+			%c[d_red] • %c[ui_gray_2] you will hurt yourself during the medical
+			intervention!\n
+		</text>
+	</string>
+	
+	<string id="st_cms">
+		<text>Surv12 Field Surgical Kit</text>
+	</string>
+	<string id="st_cms_descr">
+		<text>An advanced surgical kit with additional high-quality tools, allows treatment of serious injuries. Unlike the more common CMS kits in distribution, 
+			these instruments are both sterile and much more finely made, offering a much safer alternative for experienced stalkers.\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] advanced kit to recover bodyparts\n
+			%c[d_blue] • %c[ui_gray_2] Contains a splint that is automatically applied on use.\n
+			%c[d_blue] • %c[ui_gray_2] high quality\n
+			%c[d_red] • %c[ui_gray_2] slow usage (field kit)\n
+		</text>
+	</string>
+	
+	<string id="st_zagustin">
+		<text>Zagustin</text>
+	</string>
+	<string id="st_zagustin_descr">
+		<text>Military issue drug. Inhibitis activators of profibinolysin and slows down its
+			transformation in fibrinolysin. Temporarily stops bleeding and increases resistance to
+			bloodloss. Has side effects. Leads to severe dehydration.\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] medicine\n
+			%c[d_blue] • %c[ui_gray_2] stops bleeding fast\n
+			%c[d_blue] • %c[ui_gray_2] fast usage (syringe)\n
+		</text>
+	</string>
+	
+	<string id="st_bandage_army">
+		<text>Army Bandage</text>
+	</string>
+	<string id="st_bandage_army_descr">
+		<text>An elastic army bandage used to stop bleeding and prevent infection of wounds. For
+			regular bleeding, carefully apply the bandage to the wound. For arterial bleeding,
+			urgently tie the bandage around the affected area.\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] stops bleeding\n
+			%c[d_blue] • %c[ui_gray_2] fast usage (adhesive plaster)\n
+		</text>
+	</string>
+	
+	<string id="st_propital">
+		<text>Propital</text>
+	</string>
+	<string id="st_propital_descr">
+		<text>Military issue drug. It stimulates regeneration processes by increasing the
+			biosynthesis of purine and pyrimidine bases, RNA, functional and enzymatic cell
+			elements. Increases metabolism, health and vitality. It has long-term side effects.
+			Permitted for use only by medical officers and paramedics.\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] medicine\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_blue] • %c[ui_gray_2] high quality\n
+			%c[d_blue] • %c[ui_gray_2] fast usage (syringe)\n
+		</text>
+	</string>
+	
+	<string id="st_sj6">
+		<text>SJ6 Labs Combat Stimulant Injector</text>
+	</string>
+	<string id="st_sj6_descr">
+		<text>Combat stimulant. Mixed with a small amount of adrenalin it is used to increase the
+			body abilities before combat for about 3 minutes. The stimulant is permitted for use by special forces units. 
+			Develeped by Svarog Test Labs, marked as SJ6. Has side effects.
+			Not recommended for use in psy-active zones\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] medicine\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] fast usage (syringe)\n
+			%c[d_blue] • %c[ui_gray_2] freshens you up\n
+			%c[d_purple] • %c[ui_gray_2] very good damage resistance bonus (20%)\n
+			%c[d_purple] • %c[ui_gray_2] very good carryweight bonus\n
+			%c[d_purple] • %c[ui_gray_2] very good stamina bonus\n
+			%c[d_purple] • %c[ui_gray_2] long duration\n
+			%c[d_red] • %c[ui_gray_2] causes hallucinations but strenghtens the mind\n
+			%c[d_red] • %c[ui_gray_2] greatly increases hunger\n
+		</text>
+	</string>
+	
+	<string id="st_sj1">
+		<text>SJ1 Labs Combat Stimulant Injector</text>
+	</string>
+	<string id="st_sj1_descr">
+		<text>Combat stimulant. Is used for gaining strength and endurance before combat for about 3
+			minutes. The stimulant is permitted for use by special forces units. Develeped by Svarog
+			Test Labs, marked as SJ1. Has side effects. Not recommended for use in psy-active
+			zones\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] medicine\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] fast usage (syringe)\n
+			%c[d_blue] • %c[ui_gray_2] freshens you up\n
+			%c[d_purple] • %c[ui_gray_2] good damage resistance bonus (15%)\n
+			%c[d_purple] • %c[ui_gray_2] good carryweight bonus\n
+			%c[d_purple] • %c[ui_gray_2] very good stamina bonus\n
+			%c[d_purple] • %c[ui_gray_2] long duration\n
+			%c[d_red] • %c[ui_gray_2] causes hallucinations but strenghtens the mind\n
+			%c[d_red] • %c[ui_gray_2] increases hunger\n
+		</text>
+	</string>
+
+	<string id="st_analgin">
+		<text>Analgin painkillers</text>
+	</string>
+	<string id="st_analgin_descr">
+		<text>The most cheap and widely spread painkillers.\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] medicine\n
+			%c[d_blue] • %c[ui_gray_2] painkillers\n
+		</text>
+	</string>
+	
+	<string id="st_splint">
+		<text>Splint</text>
+	</string>
+	<string id="st_splint_descr">
+		<text>Common splint for setting damaged bones in position as an emergency aid measure.\n
+			\n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[0,255,255,255] heals broken bones \n
+			%c[d_blue] • %c[ui_gray_2] fast and permanent\n
+		</text>
+	</string>
+	
+	<string id="st_alu_splint">
+		<text>Alu splint</text>
+	</string>
+	<string id="st_alu_splint_descr">
+		<text>Common splint for setting damaged bones in position as an emergency aid measure.\n
+			\n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] heals broken bones\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_blue] • %c[ui_gray_2] fast and permanent\n
+		</text>
+	</string>
+	
+	<string id="st_etg">
+		<text>eTG-Change</text>
+	</string>
+	<string id="st_etg_descr">
+		<text>Pen injector which contains a mix of different steroids and other ingredients. Guess
+			nobody wants to know exactly what is in it. The main point is that it works.\n \n
+			%c[0,255,255,255]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] medicine\n
+			%c[d_blue] • %c[ui_gray_2] imported\n
+			%c[d_blue] • %c[ui_gray_2] military item\n
+			%c[d_blue] • %c[ui_gray_2] fast usage (syringe)\n
+			%c[d_purple] • %c[ui_gray_2] greatly increased carryweight\n
+			%c[d_purple] • %c[ui_gray_2] very good stamina bonus\n
+			%c[d_purple] • %c[ui_gray_2] very long duration\n
+			%c[d_red] • %c[ui_gray_2] greatly increases hunger\n
+		</text>
+	</string>
+	
+		<string id="st_eft_afak">
+		<text>AFAK</text>
+	</string>
+	<string id="st_eft_afak_descr">
+		<text>(Adaptive First Aid Kit). A more advanced version of the IFAK individual first
+			aid kit. The compact kit provides the individual soldier or law enforcement officer with
+			a necessary lifesaving equipment to effectively treat injuries commonly associated with
+			combat trauma.\n \n
+			%c[ui_gray_3]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] first-aid item\n
+			%c[d_blue] • %c[ui_gray_2] slow usage (fieldkit)\n
+		</text>
+	</string>
+
+	<string id="st_medkit_army">
+		<text>AFAK</text>
+	</string>
+	<string id="st_medkit_army_descr">
+		<text>(Adaptive First Aid Kit). A more advanced version of the IFAK individual first
+			aid kit. The compact kit provides the individual soldier or law enforcement officer with
+			a necessary lifesaving equipment to effectively treat injuries commonly associated with
+			combat trauma.\n \n
+			%c[ui_gray_3]PROPERTIES:\n
+			%c[d_blue] • %c[ui_gray_2] first-aid item\n
+			%c[d_blue] • %c[ui_gray_2] slow usage (fieldkit)\n
+		</text>
+	</string>
+
+	<string id="st_medkit_science">
+		<text>Salewa</text>
+	</string>
+	<string id="st_medkit_science_descr">
+		<text>A high-efficiency medical kit imported from outside the Zone. It combines powerful regenerative drugs with components for immediate blood clotting. It works significantly faster than traditional healing methods, making it a favorite among veterans for urban combat and exploring underground laboratories.\n \n
+		%c[ui_gray_3]HEALING:\n
+		%c[d_red] • %c[ui_gray_2] Restores 1.8%hp/s, total 60%\n
+		%c[ui_gray_3]PROPERTIES:\n
+		%c[d_blue] • %c[ui_gray_2] military item\n
+		%c[d_red] • %c[ui_gray_2] moderate usage (field kit)\n
+		%c[d_red] • %c[ui_gray_2] prolonged body recovery time\n
+		</text>
+	</string>
+</string_table>

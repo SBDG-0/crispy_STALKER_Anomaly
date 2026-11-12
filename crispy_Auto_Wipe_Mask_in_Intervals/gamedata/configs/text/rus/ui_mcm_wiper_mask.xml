@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<string_table>
+    <string id="ui_mcm_menu_wiper_mask_mcm">
+        <text>Протирка маски</text>
+    </string>
+    <string id="ui_mcm_title_wiper_mask_mcm">
+        <text>Автоматическая протирка маски</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_help">
+        <text>Используйте назначенную клавишу в игре, чтобы включить или выключить автоматическую протирку маски.</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_key">
+        <text>Переключение автопротирки маски</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_key_desc">
+        <text>Клавиша для включения или выключения автоматической протирки маски.</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_interval">
+        <text>Интервал между протирками (сек.)</text>
+    </string>
+    <string id="ui_mcm_wiper_mask_mcm_interval_desc">
+        <text>Время между протирками при включённой автоматической протирке маски.</text>
+    </string>
+    <string id="st_wiper_mask_enabled">
+        <text>Автоматическая протирка маски включена.</text>
+    </string>
+    <string id="st_wiper_mask_disabled">
+        <text>Автоматическая протирка маски выключена.</text>
+    </string>
+</string_table>

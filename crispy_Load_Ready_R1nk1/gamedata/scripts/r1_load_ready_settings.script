@@ -1,0 +1,64 @@
+-- Shared defaults. Do not call ui_mcm.get while MCM is building its option tree.
+defaults = {
+    entry_mode = 0, auto_delay = 0.35, enabled = true, mode = 1, volume = 0.85,
+    extra_voice = false, pda_choice = 0, jokes = false,
+    radio_channel_1 = true, radio_channel_2 = true, radio_playlist_1 = true,
+    radio_tail = 5, radio_limit = 120,
+    custom_playback = 0, custom_stop_on_entry = false,
+    screamer = false, screamer_sound = "blowout", debug = true,
+}
+local ranges = {auto_delay={0.1,5}, entry_mode={0,1}, mode={1,4}, volume={0,1}, pda_choice={0,5},
+    radio_tail={0,30}, radio_limit={5,300}, custom_playback={0,1}}
+local integers = {entry_mode=true, mode=true, pda_choice=true, custom_playback=true}
+
+function validate(key, v)
+    local def = defaults[key]
+    if type(def) == "boolean" then
+        if type(v) == "boolean" then return v end
+        if v == "true" or v == "on" or v == "1" or v == 1 then return true end
+        if v == "false" or v == "off" or v == "0" or v == 0 then return false end
+        return def
+    elseif type(def) == "number" then
+        v = tonumber(v)
+        if not v or v ~= v or v == math.huge or v == -math.huge then return def end
+        local r = ranges[key]
+        v = math.max(r[1], math.min(r[2], v))
+        if integers[key] then v = math.floor(v) end
+        return v
+    elseif key == "screamer_sound" then
+        return r1_load_ready_catalog.normalise(v) or def
+    end
+    return def
+end
+
+function read()
+    local values = {}
+    for k,v in pairs(defaults) do values[k] = v end
+    local ok, ini = pcall(function()
+        if getFS():exist("$game_config$", "r1_load_ready.ltx") then
+            return ini_file("r1_load_ready.ltx")
+        end
+    end)
+    if ok and ini then
+        for key in pairs(defaults) do
+            local read_ok, v = pcall(function()
+                if ini:section_exist("r1_load_ready") and ini:line_exist("r1_load_ready", key) then
+                    return ini:r_string("r1_load_ready", key)
+                end
+            end)
+            if read_ok and v ~= nil then values[key] = validate(key, v) end
+        end
+    end
+    -- The same global store MCM uses. Safe before ui_mcm has initialized its cache.
+    -- No per-save storage: loading an old save cannot revert these options.
+    if axr_main and axr_main.config then
+        for key, def in pairs(defaults) do
+            local ty = type(def) == "boolean" and 1 or (type(def) == "number" and 2 or 0)
+            local read_ok, value = pcall(function()
+                return axr_main.config:r_value("mcm", "r1_load_ready/" .. key, ty, values[key])
+            end)
+            if read_ok and value ~= nil then values[key] = validate(key, value) end
+        end
+    end
+    return values
+end
