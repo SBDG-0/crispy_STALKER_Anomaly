@@ -1,12 +1,22 @@
 # Sota UI Rework MAS DevKit Ultrawide Patch
-### Requirements
+
+Adjusts the draggable HUD editor layout for Sota UI Rework and the MAS DevKit on ultrawide displays.
+
+## Requirements
+
 - [Modular Attachment System - party_50](https://www.moddb.com/mods/stalker-anomaly/addons/modular-attachment-system)
 - [Sota UI Rework - sota](https://www.moddb.com/mods/stalker-anomaly/addons/ui-rework-gamma-style-by-sota)
 
-### Installation:
-Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly/releases) as a separate mod in MO2. 
+## Installation
 
-Enable in Mod Organizer.
+Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly/releases) as a separate mod in MO2.
 
-#### What it does?
-Adjusts the layout on the draggable hud editor layout slightly.
+Enable it in Mod Organizer 2.
+
+<img src="https://github.com/user-attachments/assets/1219366c-9ea4-4da9-a24f-fb91b4b8195a" alt="Ultrawide MAS DevKit HUD editor layout" width="900" />
+
+---
+
+[Back to all mods](../README.md)
+
+made with ❤️ by SavageBulldogOG

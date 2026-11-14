@@ -2,20 +2,30 @@
 
 Adds a separate random-name button beside the character name field on the new-game faction selection screen. It changes only the name, keeping the selected faction and other starting choices.
 
-### Functionality
+<img src="https://github.com/user-attachments/assets/9870052f-6fa9-4e51-a6d3-059819375ab1" alt="Faction selection with the separate random-name button" width="900" />
+
+## Functionality
+
 - Uses the current faction and Anomaly's translated first/last-name pools.
 - Army, Duty and UNISG use military rank name pools; other factions use stalker, bandit and science pools.
 - Inserts the button dynamically for the standard, 16:9 and 21:9 faction-selection XML files, reducing the name field width to make room.
 
-### Requirements and compatibility
+## Requirements and compatibility
+
 Requires Anomaly and [Modded Exes](https://github.com/themrdemonized/xray-monolith) with the `on_xml_read`/ModXML API. No MCM settings. The menu must retain Anomaly's `UINewGame` class, name field and random-button layout elements; heavily replaced new-game menus may need adaptation. No original XML file is replaced.
 
-### Credits
+## Credits
+
 - SavageBulldog / SavageBulldogOG: button and integration script.
 - Anomaly developers: original faction-selection menu, random-name logic, translations and name pools. The script explicitly follows the name step of `UINewGame:OnRandomize`.
 - Modded Exes contributors: runtime XML editing and callbacks.
 
-### Installation
+## Installation
+
 Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. To build an archive, ZIP the contents of this mod folder rather than the entire repository. Disable the mod in MO2 to remove its files.
 
-Repository changes by [SavageBulldog / SavageBulldogOG](https://github.com/SBDG-0/crispy_stalker_anomaly). Original authors retain credit for their code and assets.
+---
+
+[Back to all mods](../README.md)
+
+made with ❤️ by SavageBulldogOG
