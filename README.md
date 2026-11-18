@@ -26,6 +26,52 @@ More detailed instructions and information can be found in each mod’s README i
 
 Compatibility patch for Stealth v2.31 and Ghillie Rework v1.2.
 
+### [Lowered Weapon Sprint Extended](crispy_Lowered_Weapon_Sprint_extended/README.md)
+
+**Version:** `1.0.0`
+
+Combines automatic sprint lowering, adjustable weapon poses, and configurable wheel/key stance and holster controls in one addon with two MCM settings tabs.
+
+### [Faction Select Name Randomizer Button](crispy_Faction_Select_Name_Randomizer_Button/README.md)
+
+**Version:** `1.0.0`
+
+Adds a separate random-name button beside the character name field on the new-game faction selection screen. It changes only the name, keeping the selected faction and other starting choices.
+
+<img src="https://github.com/user-attachments/assets/9870052f-6fa9-4e51-a6d3-059819375ab1" alt="Faction selection with the separate random-name button" width="900" />
+
+### [Item Spawner Search Box](crispy_Item_Spawner_Search_Box/README.md)
+
+**Version:** `1.0.2`
+
+Search the debug item spawner by display name or section ID across all categories, with synchronized list/grid results.
+
+### [Custom Loading Screen Background for Multiplayer](crispy_Custom_Loading_Screen_BG_For_MP/README.md)
+
+**Version:** `1.0.0`
+
+Replaces the loading-screen background with artwork selected for multiplayer.
+
+<img src="https://github.com/user-attachments/assets/86471905-0200-49c0-9369-188a5af9516c" alt="Custom loading-screen background" width="900" />
+
+### [Auto Wipe Mask in Intervals](crispy_Auto_Wipe_Mask_in_Intervals/README.md)
+
+**Version:** `1.0.0`
+
+Toggles repeated mask wiping at a configurable interval using Anomaly's existing mask-cleaning function.
+
+<img src="https://github.com/user-attachments/assets/8fdb6c95-32d0-40cf-aa86-6789292daf8b" alt="Automatic mask wiping toggle" width="900" />
+
+<img src="https://github.com/user-attachments/assets/38f52d4d-89e3-48a0-9f2e-feda9a6b4339" alt="Automatic mask wiping MCM settings" width="900" />
+
+### [AUGmented AUG A1 3DSS Patch](crispy_AUGmented_Aug_A1_3DSS/README.md)
+
+**Version:** `1.0.0`
+
+Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model, reticle texture and DLTX configuration overrides.
+
+<img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" />
+
 ### [MCM Remembers Last Tab + Custom Mod Categories Compatibility Patch](crispy_MCM_Remembers_Last_Tab_CMC_Patch/README.md)
 
 **Version:** `1.1.0`
@@ -43,14 +89,6 @@ The screenshots below show the original standalone controls, now grouped under M
 <img src="https://github.com/user-attachments/assets/3848a52b-f745-447b-8aae-19f334947130" alt="Back and Forth button position settings" width="900" />
 
 <img src="https://github.com/user-attachments/assets/d5e4ee85-4fc2-4d3d-86ec-c3945e3053f3" alt="Custom Mod Categories dropdown position settings" width="900" />
-
-### [Custom Loading Screen Background for Multiplayer](crispy_Custom_Loading_Screen_BG_For_MP/README.md)
-
-**Version:** `1.0.0`
-
-Replaces the loading-screen background with artwork selected for multiplayer.
-
-<img src="https://github.com/user-attachments/assets/86471905-0200-49c0-9369-188a5af9516c" alt="Custom loading-screen background" width="900" />
 
 ### [Fatal Error + Milspec PDA MCM Text String Patch](crispy_Fatal_Error_PDA_Milspec_MCM_Fix/README.md)
 
@@ -76,14 +114,6 @@ Adjusts the layout on the draggable HUD editor for ultrawide displays.
 
 <img src="https://github.com/user-attachments/assets/1219366c-9ea4-4da9-a24f-fb91b4b8195a" alt="Ultrawide MAS DevKit HUD editor layout" width="900" />
 
-### [Faction Select Name Randomizer Button](crispy_Faction_Select_Name_Randomizer_Button/README.md)
-
-**Version:** `1.0.0`
-
-Adds a separate random-name button beside the character name field on the new-game faction selection screen. It changes only the name, keeping the selected faction and other starting choices.
-
-<img src="https://github.com/user-attachments/assets/9870052f-6fa9-4e51-a6d3-059819375ab1" alt="Faction selection with the separate random-name button" width="900" />
-
 ### [NiS XML and Faction Relations Fix](crispy_NiS_xml_fix/README.md)
 
 **Version:** `1.0.0`
@@ -91,24 +121,6 @@ Adds a separate random-name button beside the character name field on the new-ga
 Repairs malformed faction-relations bullets at runtime and includes replacement English ammo, glowstick, and medical item string tables. These full string-table files can conflict with other localization mods.
 
 <img src="https://github.com/user-attachments/assets/b93af64d-8685-4f5d-9516-2cf765f14060" alt="NiS Bullet Fix" width="900" />
-
-### [AUGmented AUG A1 3DSS Patch](crispy_AUGmented_Aug_A1_3DSS/README.md)
-
-**Version:** `1.0.0`
-
-Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model, reticle texture and DLTX configuration overrides.
-
-<img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" />
-
-### [Auto Wipe Mask in Intervals](crispy_Auto_Wipe_Mask_in_Intervals/README.md)
-
-**Version:** `1.0.0`
-
-Toggles repeated mask wiping at a configurable interval using Anomaly's existing mask-cleaning function.
-
-<img src="https://github.com/user-attachments/assets/8fdb6c95-32d0-40cf-aa86-6789292daf8b" alt="Automatic mask wiping toggle" width="900" />
-
-<img src="https://github.com/user-attachments/assets/38f52d4d-89e3-48a0-9f2e-feda9a6b4339" alt="Automatic mask wiping MCM settings" width="900" />
 
 ### [Load Ready Lite](crispy_Load_Ready_lite/README.md)
 
@@ -131,18 +143,6 @@ Replaces Anomaly's vanilla options-menu script with adjusted slider limits and f
 <img src="https://github.com/user-attachments/assets/41ec474c-ff25-47cb-9d16-f45108987a55" alt="Expanded gameplay options" width="900" />
 
 <img src="https://github.com/user-attachments/assets/5595a69d-644f-4b08-a739-898926c7f7e8" alt="Additional gameplay options" width="900" />
-
-### [Lowered Weapon Sprint Extended](crispy_Lowered_Weapon_Sprint_extended/README.md)
-
-**Version:** `1.0.0`
-
-Combines automatic sprint lowering, adjustable weapon poses, and configurable wheel/key stance and holster controls in one addon with two MCM settings tabs.
-
-### [Item Spawner Search Box](crispy_Item_Spawner_Search_Box/README.md)
-
-**Version:** `1.0.2`
-
-Search the debug item spawner by display name or section ID across all categories, with synchronized list/grid results.
 
 ## Updates and migration
 

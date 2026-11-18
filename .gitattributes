@@ -1,2 +1,27 @@
-*.script linguist-language=Lua linguist-detectable=true
-*.ltx linguist-language=INI linguist-detectable=true
+# Force GitHub Linguist to recognize X-Ray / S.T.A.L.K.E.R. mod files
+*.script linguist-language=Lua linguist-detectable=true linguist-vendored=false linguist-generated=false
+*.ltx linguist-language=INI linguist-detectable=true linguist-vendored=false linguist-generated=false
+
+# Ensure X-Ray UI XML files are detected properly
+*.xml linguist-language=XML linguist-detectable=true linguist-vendored=false linguist-generated=false
+
+# Optional: Treat shader files as HLSL/GLSL if you include r1/r2/r3/r4 shaders
+*.ps linguist-language=HLSL linguist-vendored=false
+*.vs linguist-language=HLSL linguist-vendored=false
+*.gs linguist-language=HLSL linguist-vendored=false
+*.h linguist-language=HLSL linguist-vendored=false
+
+# Prevent Git from corrupting binary game assets with line-ending conversions
+*.ogf binary
+*.omf binary
+*.dm binary
+*.dds binary
+*.thm binary
+*.ogg binary
+*.xr binary
+*.spawn binary
+*.geom binary
+*.geomx binary
+*.cform binary
+*.level binary
+*.db* binary
