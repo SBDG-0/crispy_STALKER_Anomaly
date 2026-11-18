@@ -1,0 +1,21 @@
+-- Scroll Stance: rebindable controls. MCM 1.6+ key_bind support.
+function build_page()
+    return {id="swrl_scroll_stance", sh=true, gr={
+        {id="title", type="slide", link="ui_options_slider_player", text="ui_mcm_menu_swrl_scroll_stance", size={512,50}, spacing=20},
+        {id="enabled", type="check", val=1, def=true},
+        {id="wheel_up", type="list", val=2, def=1, content={{0,"swrl_none"},{1,"swrl_raise"},{2,"swrl_lower"},{3,"swrl_toggle"},{4,"swrl_holster_toggle"},{5,"swrl_holster"},{6,"swrl_draw"}}},
+        {id="wheel_down", type="list", val=2, def=2, content={{0,"swrl_none"},{1,"swrl_raise"},{2,"swrl_lower"},{3,"swrl_toggle"},{4,"swrl_holster_toggle"},{5,"swrl_holster"},{6,"swrl_draw"}}},
+        {id="invert", type="check", val=1, def=false},
+        {id="wheel_delay", type="track", val=2, def=0, min=0, max=500, step=25},
+        {id="keys_title", type="title", text="ui_mcm_swrl_scroll_stance_keys_title"},
+        {id="raise_key", type="key_bind", val=2, def=0},
+        {id="lower_key", type="key_bind", val=2, def=0},
+        {id="toggle_key", type="key_bind", val=2, def=0},
+        {id="holster_title", type="title", text="ui_mcm_swrl_scroll_stance_holster_title"},
+        {id="holster_key", type="check", val=1, def=true},
+        {id="holster_source", type="list", val=2, def=0, content={{0,"swrl_game_key"},{1,"swrl_custom_key"}}},
+        {id="holster_bind", type="key_bind", val=2, def=0},
+        {id="holster_action", type="list", val=2, def=4, content={{4,"swrl_holster_toggle"},{5,"swrl_holster"},{6,"swrl_draw"}}},
+        {id="desc", type="desc", text="ui_mcm_swrl_scroll_stance_desc", clr={255,220,200,160}},
+    }}
+end

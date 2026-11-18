@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='windows-1251'?>
+<string_table>
+  <string id="ui_mcm_menu_crispy_lowered_weapons">
+    <text>Lowered Weapon Sprint</text>
+  </string>
+  <string id="ui_mcm_lws_sprint_tab">
+    <text>Sprint and Position</text>
+  </string>
+  <string id="ui_mcm_lws_keys_tab">
+    <text>Keys and Wheel</text>
+  </string>
+  <string id="ui_mcm_menu_lower_weapon_sprint">
+    <text>Lowered Weapon Sprint</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_auto_lower">
+    <text>Automatically lower while sprinting</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_auto_lower_desc">
+    <text>Original Lower Weapon Sprint behavior: lower eligible weapons while sprinting, restore their stance afterward, and handle firing, reloads, jams and equipping. Turn off to keep the normal sprint animation and adjust it with its position profile.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_positions_enabled">
+    <text>Enable position and pitch profiles</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_positions_enabled_desc">
+    <text>Master switch for all three visual profiles. Does not change automatic lowering or the blacklist. No FOV or world-camera changes.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_transition">
+    <text>Transition time</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_transition_desc">
+    <text>Smoothly blend both into and out of each state. Instant disables this blend. Aiming, firing, reloads, menus, weapon changes, crouching/sliding and cover tilt take priority.</text>
+  </string>
+  <string id="ui_mcm_lst_lws_100ms">
+    <text>100 ms</text>
+  </string>
+  <string id="ui_mcm_lst_lws_200ms">
+    <text>200 ms</text>
+  </string>
+  <string id="ui_mcm_lst_lws_300ms">
+    <text>300 ms</text>
+  </string>
+  <string id="ui_mcm_lst_lws_500ms">
+    <text>500 ms</text>
+  </string>
+  <string id="ui_mcm_lst_lws_1000ms">
+    <text>1000 ms</text>
+  </string>
+  <string id="ui_mcm_lst_lws_instant">
+    <text>Instant</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_title">
+    <text>Sprinting with weapon lowered</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_enabled">
+    <text>Enable this profile</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_enabled_desc">
+    <text>Use this profile only in the state shown above. Each state has independent settings. Disabling this profile restores the original position in that state. Profiles do not stack.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_x">
+    <text>Left / right (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_x_desc">
+    <text>Negative = left; positive = right. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_y">
+    <text>Down / up (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_y_desc">
+    <text>Negative = down; positive = up. Lower this further to move the model below view. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_z">
+    <text>Backward / forward (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_z_desc">
+    <text>Negative = toward the view; positive = away. Moving the model can change its apparent size without changing FOV. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_pitch">
+    <text>Pitch: tilt up / down (degrees)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_pitch_desc">
+    <text>Additional rotation around the horizontal axis. Zero keeps the original tilt. Adjust either direction to find the desired weapon angle. This tilts the model, not your aim or the world camera. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_yaw">
+    <text>Yaw: turn left / right (degrees)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_sprint_yaw_desc">
+    <text>Additional rotation around the vertical axis. Zero keeps the original heading. Adjust either direction to move an exposed arm edge out of view. Only the hands and weapon rotate; your aim and world camera are unchanged. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_title">
+    <text>Sprinting with weapon raised</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_enabled">
+    <text>Enable this profile</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_enabled_desc">
+    <text>Use this profile only in the state shown above. Each state has independent settings. Disabling this profile restores the original position in that state. Profiles do not stack.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_x">
+    <text>Left / right (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_x_desc">
+    <text>Negative = left; positive = right. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_y">
+    <text>Down / up (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_y_desc">
+    <text>Negative = down; positive = up. Lower this further to move the model below view. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_z">
+    <text>Backward / forward (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_z_desc">
+    <text>Negative = toward the view; positive = away. Moving the model can change its apparent size without changing FOV. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_pitch">
+    <text>Pitch: tilt up / down (degrees)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_pitch_desc">
+    <text>Additional rotation around the horizontal axis. Zero keeps the original tilt. Adjust either direction to find the desired weapon angle. This tilts the model, not your aim or the world camera. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_yaw">
+    <text>Yaw: turn left / right (degrees)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_normal_sprint_yaw_desc">
+    <text>Additional rotation around the vertical axis. Zero keeps the original heading. Adjust either direction to move an exposed arm edge out of view. Only the hands and weapon rotate; your aim and world camera are unchanged. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_title">
+    <text>Weapon lowered without sprinting</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_enabled">
+    <text>Enable this profile</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_enabled_desc">
+    <text>Use this profile only in the state shown above. Each state has independent settings. Disabling this profile restores the original position in that state. Profiles do not stack.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_x">
+    <text>Left / right (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_x_desc">
+    <text>Negative = left; positive = right. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_y">
+    <text>Down / up (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_y_desc">
+    <text>Negative = down; positive = up. Lower this further to move the model below view. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_z">
+    <text>Backward / forward (cm)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_z_desc">
+    <text>Negative = toward the view; positive = away. Moving the model can change its apparent size without changing FOV. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_pitch">
+    <text>Pitch: tilt up / down (degrees)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_pitch_desc">
+    <text>Additional rotation around the horizontal axis. Zero keeps the original tilt. Adjust either direction to find the desired weapon angle. This tilts the model, not your aim or the world camera. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_yaw">
+    <text>Yaw: turn left / right (degrees)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_lower_idle_yaw_desc">
+    <text>Additional rotation around the vertical axis. Zero keeps the original heading. Adjust either direction to move an exposed arm edge out of view. Only the hands and weapon rotate; your aim and world camera are unchanged. Relative to each weapon existing pose. Apply MCM settings to preview in-game.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_blacklist_title">
+    <text>Automatic lowering blacklist</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_keybind">
+    <text>Toggle current weapon in blacklist</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_keybind_desc">
+    <text>Default Shift+L. Modifier and activation mode are set below. Affects automatic lowering; position profiles remain independent.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_reverse_blacklist">
+    <text>Reverse blacklist (use as whitelist)</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_reverse_blacklist_desc">
+    <text>Only listed weapons automatically lower while sprinting. The normal-sprint profile can still adjust unlisted weapons.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_apply_for_all_wpn_variations">
+    <text>Apply blacklist to all weapon variations</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_apply_for_all_wpn_variations_desc">
+    <text>Treat weapons with the same parent section as one weapon, including attachment variations. Falls back to the current section if there is no parent.</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_clear_blacklist">
+    <text>Clear blacklist on Apply</text>
+  </string>
+  <string id="ui_mcm_lower_weapon_sprint_clear_blacklist_desc">
+    <text>Clear the original mod blacklist from existing game settings, then reset this checkbox.</text>
+  </string>
+  <string id="ui_lower_weapon_sprint_blacklist_add">
+    <text>Current weapon added to the blacklist.</text>
+  </string>
+  <string id="ui_lower_weapon_sprint_blacklist_remove">
+    <text>Current weapon removed from the blacklist.</text>
+  </string>
+  <string id="ui_lower_weapon_sprint_blacklist_cleared">
+    <text>Blacklist cleared.</text>
+  </string>
+</string_table>

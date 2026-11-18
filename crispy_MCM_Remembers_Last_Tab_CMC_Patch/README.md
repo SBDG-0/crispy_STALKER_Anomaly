@@ -1,23 +1,10 @@
 # MCM Remembers Last Tab + Custom Mod Categories Compatibility Patch
 
+**Version:** `1.1.0`
+
+## Description
+
 Adds Custom Mod Categories compatibility to MCM Remembers Last Tab.
-
-## Requirements
-
-- [Mod Configuration Menu - ravenascendant](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu)
-- [Custom Mod Categories - elseform](https://github.com/elseform/anomaly-mods/tree/release/Custom%20Mod%20Categories)
-- [MCM Remembers Last Tab v1.2 - turretrider](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-remembers-last-tab)
-
-## Installation
-
-Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly/releases) as a separate mod in MO2.
-
-Enable this mod below both originals in Mod Organizer,
-It has to have priority over the scripts from turretrider.
-
-## Update 1.01
-
-Fixed incompatibility with Back and Forth Buttons for MCM
 
 ## Features
 
@@ -34,6 +21,28 @@ Fixed incompatibility with Back and Forth Buttons for MCM
 - Removed categories fall back to the category overview. Reassigned pages use their current category.
 - Existing Enable and Remember Scroll settings remain available. The legacy page is imported on first use without its unqualified scroll offset.
 
+## Requirements
+
+- [Mod Configuration Menu - ravenascendant](https://www.moddb.com/mods/stalker-anomaly/addons/anomaly-mod-configuration-menu)
+- [Custom Mod Categories - elseform](https://github.com/elseform/anomaly-mods/tree/release/Custom%20Mod%20Categories)
+- [MCM Remembers Last Tab v1.2 - turretrider](https://www.moddb.com/mods/stalker-anomaly/addons/mcm-remembers-last-tab)
+
+## Installation
+
+Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly/releases) as a separate mod in MO2.
+
+Enable this patch below both original mods in Mod Organizer 2 so its scripts override turretrider’s version.
+
+## Changelog
+
+### 1.1.0
+
+Previously labeled `1.01`; normalized to major.minor.patch.
+
+Fixed compatibility with Back and Forth Buttons for MCM.
+
+---
+
 ## Reuse
 
 This software is provided "as is", without warranty of any kind. It is free to use, modify, and distribute provided you credit the author (SavageBulldog) and include a link back to the original repository.
@@ -42,6 +51,6 @@ This software is provided "as is", without warranty of any kind. It is free to u
 
 ---
 
-[Back to all mods](../README.md)
+[Back to main page](../README.md)
 
 made with ❤️ by SavageBulldogOG

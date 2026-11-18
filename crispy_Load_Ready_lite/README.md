@@ -1,10 +1,16 @@
 # Load Ready Lite
 
+**Version:** `1.0.0`
+
+## Description
+
 Plays one notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
+
+## Preview
 
 https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1
 
-## Functionality and configuration
+## Features and configuration
 
 Uses the Modded Exes loading-screen callback and waits for precaching/audio muting to finish before playing the cue. Pending playback is cancelled when a new loading cycle or actor change resets the script. The audio wait ends after 60 seconds if precaching never completes.
 
@@ -27,6 +33,6 @@ Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the
 
 ---
 
-[Back to all mods](../README.md)
+[Back to main page](../README.md)
 
 made with ❤️ by SavageBulldogOG

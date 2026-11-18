@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<string_table>
+  <string id="ui_mcm_menu_crispy_mcm_ui_tweaks"><text>MCM UI Tweaks</text></string>
+  <string id="ui_mcm_tweaks_back_forth"><text>Back and Forth Position</text></string>
+  <string id="ui_mcm_tweaks_cmc"><text>Custom Mod Categories Dropdown</text></string>
+</string_table>

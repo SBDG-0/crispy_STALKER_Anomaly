@@ -1,6 +1,14 @@
 # Pizza's Ultimate Sight Selection for Anomaly Magnifier MCM Text Patch
 
+**Version:** `1.0.0`
+
+## Description
+
 Adds the missing English and Russian MCM strings for the magnifier script used in Pizza's Ultimate Sight Selection for Anomaly.
+
+## Preview
+
+<img src="https://github.com/user-attachments/assets/63336ca8-6859-47f3-8452-2ee2dd07568b" alt="Magnifier MCM settings with restored text" width="900" />
 
 ## Requirements
 
@@ -10,11 +18,11 @@ Adds the missing English and Russian MCM strings for the magnifier script used i
 
 Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly/releases) as a separate mod in MO2.
 
-Enable this mod alongside Pizza's Ultimate Sight Selection for Anomaly in Mod Organizer.
-
-<img src="https://github.com/user-attachments/assets/63336ca8-6859-47f3-8452-2ee2dd07568b" alt="Magnifier MCM settings with restored text" width="900" />
+Enable this mod alongside Pizza's Ultimate Sight Selection for Anomaly in Mod Organizer 2.
 
 No original mod files are changed by this patch.
+
+---
 
 ## Reuse
 
@@ -24,6 +32,6 @@ This software is provided "as is", without warranty of any kind. It is free to u
 
 ---
 
-[Back to all mods](../README.md)
+[Back to main page](../README.md)
 
 made with ❤️ by SavageBulldogOG

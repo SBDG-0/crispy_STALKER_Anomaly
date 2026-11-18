@@ -1,6 +1,14 @@
 # Fatal Error + Milspec PDA MCM Text String Patch
 
+**Version:** `1.0.0`
+
+## Description
+
 Fixes missing MCM text and improves wording for Fatal Error and Milspec PDA.
+
+## Preview
+
+<img src="https://github.com/user-attachments/assets/ff554476-65f3-45ba-854a-e754bc4f5ce2" alt="Corrected Fatal Error and Milspec PDA MCM text" width="900" />
 
 ## Requirements
 
@@ -13,10 +21,8 @@ Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly
 
 Enable it in Mod Organizer 2.
 
-<img src="https://github.com/user-attachments/assets/ff554476-65f3-45ba-854a-e754bc4f5ce2" alt="Corrected Fatal Error and Milspec PDA MCM text" width="900" />
-
 ---
 
-[Back to all mods](../README.md)
+[Back to main page](../README.md)
 
 made with ❤️ by SavageBulldogOG

@@ -1,0 +1,49 @@
+name: Build and Release Mod ZIPs
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: mod-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-releases:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: Test packaging rules
+        run: python .github/scripts/test_package_mods.py
+
+      - name: Validate metadata and build verified mod ZIPs
+        run: python .github/scripts/package_mods.py
+
+      - name: Upload downloadable ZIPs
+        uses: actions/upload-artifact@v4
+        with:
+          name: crispy-mod-zips
+          path: .releases/*.zip
+          if-no-files-found: error
+
+      - name: Publish tagged GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: .releases/*.zip
+          body_path: .releases/release_notes.md
+          fail_on_unmatched_files: true

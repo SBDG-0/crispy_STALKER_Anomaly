@@ -1,0 +1,51 @@
+-- Shared positioning helpers for MCM UI Tweaks components.
+local X_MIN, X_MAX = -1024, 1024
+local Y_MIN, Y_MAX = -768, 768
+local EDGE_MARGIN = 4
+
+function capture(controls)
+    local state = {controls = controls, positions = {}}
+    for i, control in ipairs(controls) do
+        local p = control:GetWndPos()
+        state.positions[i] = {x = p.x, y = p.y}
+    end
+    return state
+end
+
+function move(self, state, x, y)
+    if #state.controls == 0 then return end
+    local left, top, right, bottom = math.huge, math.huge, -math.huge, -math.huge
+    for i, control in ipairs(state.controls) do
+        local p = state.positions[i]
+        left, top = math.min(left, p.x), math.min(top, p.y)
+        right = math.max(right, p.x + control:GetWidth())
+        bottom = math.max(bottom, p.y + control:GetHeight())
+    end
+    -- Controls are children of dialog; outside that frame they stop receiving
+    -- mouse input even when still visible. Clamp in parent-local coordinates.
+    local xmin = EDGE_MARGIN - left
+    local xmax = self.dialog:GetWidth() - EDGE_MARGIN - right
+    local ymin = EDGE_MARGIN - top
+    local ymax = self.dialog:GetHeight() - EDGE_MARGIN - bottom
+    local dx = math.max(xmin, math.min(xmax, x))
+    local dy = math.max(ymin, math.min(ymax, y))
+    if state.dx == dx and state.dy == dy then return end
+    for i, control in ipairs(state.controls) do
+        local p = state.positions[i]
+        control:SetWndPos(vector2():set(p.x + dx, p.y + dy))
+    end
+    state.dx, state.dy = dx, dy
+end
+
+function read_offsets(prefix)
+    prefix = "crispy_mcm_ui_tweaks/" .. prefix
+    if not (ui_mcm and ui_mcm.get) then return 0, 0 end
+    local x = tonumber(ui_mcm.get(prefix .. "/x_offset")) or 0
+    local y = tonumber(ui_mcm.get(prefix .. "/y_offset")) or 0
+    if x ~= x or x == math.huge or x == -math.huge then x = 0 end
+    if y ~= y or y == math.huge or y == -math.huge then y = 0 end
+    x = math.max(X_MIN, math.min(X_MAX, x))
+    y = math.max(Y_MIN, math.min(Y_MAX, y))
+    return x, y
+end
+

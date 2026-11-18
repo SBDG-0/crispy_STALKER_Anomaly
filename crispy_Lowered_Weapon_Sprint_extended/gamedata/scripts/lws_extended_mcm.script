@@ -1,0 +1,96 @@
+-- Shared validated options and the combined MCM page.
+local defaults = {auto_lower=true, positions_enabled=true, transition=200,
+    keybind=DIK_keys and DIK_keys.DIK_L or 38,modifier=1,mode=0,
+    reverse_blacklist=false,apply_for_all_wpn_variations=true,clear_blacklist=false,
+    lower_sprint_enabled=true,lower_sprint_x=0,lower_sprint_y=0,lower_sprint_z=0,lower_sprint_pitch=0,lower_sprint_yaw=0,
+    normal_sprint_enabled=true,normal_sprint_x=0,normal_sprint_y=0,normal_sprint_z=0,normal_sprint_pitch=0,normal_sprint_yaw=0,
+    lower_idle_enabled=true,lower_idle_x=0,lower_idle_y=0,lower_idle_z=0,lower_idle_pitch=0,lower_idle_yaw=0}
+
+function read()
+    local out={}
+    for key,default in pairs(defaults) do
+        local value
+        if ui_mcm and ui_mcm.get then
+            local ok,v=pcall(ui_mcm.get,"crispy_lowered_weapons/lower_weapon_sprint/"..key)
+            if ok then value=v end
+        end
+        if type(default)=="boolean" then
+            if type(value)=="boolean" then out[key]=value else out[key]=default end
+        else
+            value=tonumber(value)
+            if not value or value~=value or value==math.huge or value==-math.huge then value=default end
+            if key=="keybind" then value=math.max(0,math.floor(value))
+            elseif key=="modifier" then if value~=0 and value~=1 and value~=3 then value=default end
+            elseif key=="mode" then value=math.max(0,math.min(2,math.floor(value)))
+            elseif key=="transition" then value=math.max(0,math.min(1000,value))
+            elseif key:match("_pitch$") or key:match("_yaw$") then value=math.max(-90,math.min(90,value))
+            else value=math.max(-100,math.min(100,value)) end
+            out[key]=value
+        end
+    end
+    return out
+end
+
+local function sprint_page()
+    local gr={
+        {id="title",type="slide",link="ui_options_slider_player",text="ui_mcm_menu_lower_weapon_sprint",size={512,50},spacing=20},
+        {id="auto_lower",type="check",val=1,def=true},
+        {id="positions_enabled",type="check",val=1,def=true},
+        {id="transition",type="list",val=2,def=200,
+            content={{0,"lws_instant"},{100,"lws_100ms"},{200,"lws_200ms"},{300,"lws_300ms"},{500,"lws_500ms"},{1000,"lws_1000ms"}}},
+    }
+    gr[#gr+1]={id="blacklist_title",type="title",text="ui_mcm_lower_weapon_sprint_blacklist_title"}
+    gr[#gr+1]={id="keybind",type="key_bind",val=2,def=defaults.keybind}
+    gr[#gr+1]={id="modifier",type="list",val=2,def=1,hint="mcm_kb_modifier",
+        content={{0,"mcm_kb_mod_none"},{1,"mcm_kb_mod_shift"},{3,"mcm_kb_mod_alt"}}}
+    gr[#gr+1]={id="mode",type="list",val=2,def=0,hint="mcm_kb_mode",
+        content={{0,"mcm_kb_mode_press"},{1,"mcm_kb_mode_dtap"},{2,"mcm_kb_mode_hold"}}}
+    gr[#gr+1]={id="reverse_blacklist",type="check",val=1,def=false}
+    gr[#gr+1]={id="apply_for_all_wpn_variations",type="check",val=1,def=true}
+    gr[#gr+1]={id="clear_blacklist",type="check",val=1,def=false}
+    for _,profile in ipairs({"lower_sprint","normal_sprint","lower_idle"}) do
+        gr[#gr+1]={id=profile.."_title",type="title",align="l",text="ui_mcm_lower_weapon_sprint_"..profile.."_title"}
+        gr[#gr+1]={id=profile.."_enabled",type="check",val=1,def=defaults[profile.."_enabled"]}
+        for _,axis in ipairs({"x","y","z","pitch","yaw"}) do
+            local id=profile.."_"..axis
+            local rotation=axis=="pitch" or axis=="yaw"
+            gr[#gr+1]={id=id,type="track",val=2,def=defaults[id],min=rotation and -90 or -100,
+                max=rotation and 90 or 100,step=0.5,prec=1}
+        end
+    end
+    return {id="lower_weapon_sprint",sh=true,gr=gr}
+end
+
+-- Give both panels a common parent; explicit hints retain their translations.
+-- Migrate stored values directly: ui_mcm.get is forbidden during tree building.
+local function prepare_page(page, title)
+    page.text=title
+    local config=axr_main and axr_main.config
+    local changed=false
+    for _,control in ipairs(page.gr) do
+        if control.val~=nil then
+            control.hint=control.hint or (page.id.."_"..control.id)
+            if config then
+                local old_path=page.id.."/"..control.id
+                local new_path="crispy_lowered_weapons/"..old_path
+                local existing=config:r_value("mcm",new_path,control.val)
+                if existing==nil then
+                    local previous=config:r_value("mcm",old_path,control.val)
+                    if previous~=nil then
+                        config:w_value("mcm",new_path,previous)
+                        changed=true
+                    end
+                end
+            end
+        end
+    end
+    if changed then config:save() end
+    return page
+end
+
+function on_mcm_load()
+    return {id="crispy_lowered_weapons",gr={
+        prepare_page(sprint_page(),"ui_mcm_lws_sprint_tab"),
+        prepare_page(lwk_extended_mcm.build_page(),"ui_mcm_lws_keys_tab"),
+    }}
+end

@@ -1,12 +1,18 @@
 # NiS Faction Relations Bullet Fix
 
+**Version:** `1.0.0`
+
+## Description
+
 Repairs the malformed bullet character displayed in faction relationship descriptions on the new-game faction selection screen.
 
-## Functionality
-
-After the original `UINewGame:UpdateDescr` runs, replaces UTF-8 replacement-character bytes in the relationship text with the Windows-1251 bullet expected by the game's font. When replacements occur, recalculates the text height.
+## Preview
 
 <img src="https://github.com/user-attachments/assets/b93af64d-8685-4f5d-9516-2cf765f14060" alt="NiS Bullet Fix" width="900" />
+
+## Features
+
+After the original `UINewGame:UpdateDescr` runs, replaces UTF-8 replacement-character bytes in the relationship text with the Windows-1251 bullet expected by the game's font. When replacements occur, recalculates the text height.
 
 ## Requirements and compatibility
 
@@ -24,6 +30,6 @@ Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the
 
 ---
 
-[Back to all mods](../README.md)
+[Back to main page](../README.md)
 
 made with ❤️ by SavageBulldogOG

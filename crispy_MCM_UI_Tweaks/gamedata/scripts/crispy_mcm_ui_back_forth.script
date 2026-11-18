@@ -1,0 +1,45 @@
+-- Back and Forth: signed X/Y positioning with screen bounds.
+-- Component derived from the standalone position patch 1.3.0.
+local installed = false
+-- Editable slider ranges (UI coordinates, not physical monitor pixels).
+local X_MIN, X_MAX = -1024, 1024
+local Y_MIN, Y_MAX = -768, 768
+
+local capture = crispy_mcm_ui_position.capture
+local move = crispy_mcm_ui_position.move
+local read_offsets = crispy_mcm_ui_position.read_offsets
+
+local function position_buttons(self)
+    if not (self.bf_other and self.bf_back and self.bf_forward) then return end
+    local state = self.crispy_bf_position
+    if not state or state.controls[1] ~= self.bf_other or state.controls[2] ~= self.bf_back or state.controls[3] ~= self.bf_forward then
+        state = capture({self.bf_other, self.bf_back, self.bf_forward})
+        self.crispy_bf_position = state
+    end
+    local x, y = read_offsets("crispy_bf_position")
+    move(self, state, x, y)
+end
+
+local function wrap(class)
+    if not class or not class.Update then return end
+    local update = class.Update
+    class.Update = function(self, ...)
+        local result = update(self, ...)
+        position_buttons(self)
+        return result
+    end
+end
+
+function build_tab()
+    if not installed then
+        installed = true
+        wrap(ui_mcm and ui_mcm.UI_MCM)
+        wrap(ui_options and ui_options.UIOptions)
+    end
+    return {id = "crispy_bf_position", sh = true, gr = {
+        {id = "title", type = "slide", link = "ui_options_slider_player", text = "ui_mcm_menu_crispy_bf_position", size = {512, 50}, spacing = 20},
+        {id = "desc", type = "desc", text = "ui_mcm_crispy_bf_position_description"},
+        {id = "x_offset", type = "track", val = 2, def = 0, min = X_MIN, max = X_MAX, step = 1, prec = 0},
+        {id = "y_offset", type = "track", val = 2, def = 0, min = Y_MIN, max = Y_MAX, step = 1, prec = 0},
+    }}
+end

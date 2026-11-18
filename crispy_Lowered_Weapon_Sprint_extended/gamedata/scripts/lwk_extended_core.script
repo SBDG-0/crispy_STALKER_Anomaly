@@ -1,0 +1,526 @@
+-- Scroll Stance
+-- MCM-configurable wheel actions and independent stance/holster bindings.
+-- Weapon switching on the wheel is forced off.
+-- Scope zoom, binocular magnification, and PDA map zoom are not consumed.
+
+local MOD = "swrl_scroll_stance"
+local CVAR = "mouse_wheel_change_weapon"
+local registered = false
+local options
+local held_keys = {}
+local last_wheel_at
+local logged_error = false
+local holstering = false
+-- Slot 1-6 last seen in the hands. Pressing the lower key with empty hands taps this slot again.
+local last_slot = nil
+
+local function console_exec(command)
+	local ok = pcall(function()
+		if exec_console_cmd then
+			exec_console_cmd(command)
+		else
+			get_console():execute(command)
+		end
+	end)
+	return ok
+end
+
+local function wheel_switch_is_on()
+	local console = get_console and get_console() or nil
+	if not (console and console.get_bool) then
+		return nil
+	end
+	local ok, value = pcall(function()
+		return console:get_bool(CVAR)
+	end)
+	if not ok then
+		return nil
+	end
+	return value and true or false
+end
+
+-- Missing/older MCM and missing individual options retain safe defaults.
+local DEFAULTS = {
+    enabled=true, invert=false, holster_key=true,
+    wheel_up=1, wheel_down=2, wheel_delay=0,
+    raise_key=0, lower_key=0, toggle_key=0,
+    holster_source=0, holster_bind=0, holster_action=4,
+}
+local function read_options()
+    local result = {}
+    for key, default in pairs(DEFAULTS) do
+        local value
+        if ui_mcm and type(ui_mcm.get) == "function" then
+            local ok, found = pcall(ui_mcm.get, "crispy_lowered_weapons/" .. MOD .. "/" .. key)
+            if ok then value = found end
+        end
+        if type(default) == "boolean" then
+            if type(value) == "boolean" then result[key] = value
+            else result[key] = default end
+        else
+            value = tonumber(value)
+            if not value or value ~= value or value == math.huge or value == -math.huge then
+                value = default
+            end
+            result[key] = math.max(0, math.floor(value))
+        end
+    end
+    for _, key in ipairs({"wheel_up", "wheel_down"}) do
+        if result[key] > 6 then result[key] = DEFAULTS[key] end
+    end
+    if result.holster_source > 1 then result.holster_source = 0 end
+    if result.holster_action < 4 or result.holster_action > 6 then result.holster_action = 4 end
+    result.wheel_delay = math.min(500, result.wheel_delay)
+    options = result
+    return result
+end
+
+local function get_options()
+    return options or read_options()
+end
+
+local function enforce_switch_cvar(enabled)
+	-- On: the engine must not change weapons with the wheel.
+	-- Off: put the vanilla default back so the wheel is not left dead.
+	local want_on = not enabled
+	local current = wheel_switch_is_on()
+	if current == nil or current ~= want_on then
+		console_exec(CVAR .. (want_on and " 1" or " 0"))
+	end
+end
+
+local function paused()
+	if not device then
+		return false
+	end
+	local ok, value = pcall(function()
+		return device():is_paused()
+	end)
+	return ok and value and true or false
+end
+
+local function ui_owns_wheel()
+	if paused() then
+		return true
+	end
+	if db.actor.is_talking and db.actor:is_talking() then
+		return true
+	end
+	if ActorMenu and ActorMenu.IsShown then
+		local ok, shown = pcall(function()
+			return ActorMenu:IsShown()
+		end)
+		if ok and shown then
+			return true
+		end
+	end
+	if item_device and item_device.is_pda_active then
+		local ok, active = pcall(item_device.is_pda_active)
+		if ok and active then
+			return true
+		end
+	end
+	if db.actor.active_slot then
+		local ok, slot = pcall(function()
+			return db.actor:active_slot()
+		end)
+		-- Anomaly draws the PDA from slot 8. The map owns the wheel then.
+		if ok and slot == 8 then
+			return true
+		end
+	end
+	if level and level.main_input_receiver then
+		local ok, wnd = pcall(level.main_input_receiver)
+		if ok and wnd ~= nil then
+			return true
+		end
+	end
+	return false
+end
+
+local function section_of(item)
+	local section = ""
+	pcall(function()
+		section = item:section() or ""
+	end)
+	return section
+end
+
+local function zoom_owns_wheel(item)
+	if not item then
+		return false
+	end
+	local section = section_of(item)
+	-- Binoculars use the wheel for magnification. Never treat that as stance.
+	if string.find(section, "binoc", 1, true) then
+		return true
+	end
+	local zoomed = false
+	pcall(function()
+		local wpn = item.cast_Weapon and item:cast_Weapon() or nil
+		if not wpn then
+			return
+		end
+		if wpn.IsZoomed and wpn:IsZoomed() then
+			zoomed = true
+		elseif wpn.is_zoomed and wpn:is_zoomed() then
+			zoomed = true
+		end
+	end)
+	return zoomed
+end
+
+local function weapon_can_stance(item)
+	if not item or zoom_owns_wheel(item) then
+		return false
+	end
+	local section = section_of(item)
+	if section == "" then
+		return false
+	end
+	if string.find(section, "binoc", 1, true) then
+		return false
+	end
+	if string.find(section, "detector", 1, true) then
+		return false
+	end
+	if string.sub(section, 1, 7) == "device_" then
+		return false
+	end
+	if string.sub(section, 1, 8) == "grenade_" then
+		return false
+	end
+	if section == "bolt" or string.sub(section, 1, 5) == "bolt_" then
+		return false
+	end
+	if IsBolt and IsBolt(item) then
+		return false
+	end
+	if IsGrenade and IsGrenade(item) then
+		return false
+	end
+	if IsDevice and IsDevice(item) then
+		return false
+	end
+	local is_weapon = false
+	pcall(function()
+		if IsWeapon and IsWeapon(item) then
+			is_weapon = true
+			return
+		end
+		local wpn = item.cast_Weapon and item:cast_Weapon() or nil
+		is_weapon = wpn ~= nil
+	end)
+	return is_weapon
+end
+
+local function weapon_is_lowered()
+	if not (game and game.actor_weapon_lowered) then
+		return false, nil
+	end
+	local ok, lowered = pcall(game.actor_weapon_lowered)
+	if not ok then
+		return false, nil
+	end
+	return true, lowered and true or false
+end
+
+-- Controls label "Lower/Raise Weapon". user.ltx action name is safemode (default B).
+local function lower_action_id()
+	if not key_bindings then
+		return nil
+	end
+	return key_bindings.kSAFEMODE
+end
+
+local function slot_action(slot)
+	if not key_bindings then
+		return nil
+	end
+	if slot == 1 then return key_bindings.kWPN_1 end
+	if slot == 2 then return key_bindings.kWPN_2 end
+	if slot == 3 then return key_bindings.kWPN_3 end
+	if slot == 4 then return key_bindings.kWPN_4 end
+	if slot == 5 then return key_bindings.kWPN_5 end
+	if slot == 6 then return key_bindings.kWPN_6 end
+	return nil
+end
+
+-- Hands slot for a real equipped item. Empty hands and the PDA are not 1-6.
+local function equipped_slot()
+	local slot = nil
+	pcall(function()
+		slot = db.actor:active_slot()
+	end)
+	if type(slot) == "number" and slot >= 1 and slot <= 6 then
+		return slot
+	end
+	local item = nil
+	pcall(function()
+		item = db.actor:active_item()
+	end)
+	if item and item.slot then
+		local item_slot = nil
+		pcall(function()
+			item_slot = item:slot()
+		end)
+		if type(item_slot) == "number" and item_slot >= 1 and item_slot <= 6 then
+			return item_slot
+		end
+	end
+	return nil
+end
+
+-- Same result as tapping that slot key. Equipped: the engine holsters it.
+-- Already away: the engine draws it. Do not step past kWPN_6.
+local function press_slot(slot, putting_away)
+	local action = slot_action(slot)
+	local dik = nil
+	if action and bind_to_dik then
+		local ok, value = pcall(bind_to_dik, action)
+		if ok and type(value) == "number" and value ~= 0 then
+			dik = value
+		end
+	end
+	if dik and level and level.press_action then
+		level.press_action(dik)
+		if level.release_action then
+			level.release_action(dik)
+		end
+		return
+	end
+	if not (db.actor and db.actor.activate_slot) then
+		return
+	end
+	if putting_away then
+		db.actor:activate_slot(0)
+	else
+		db.actor:activate_slot(slot)
+	end
+end
+
+local function note_hands()
+	local slot = equipped_slot()
+	if slot then
+		last_slot = slot
+	end
+end
+
+-- In hand: remember the slot and tap its key, which holsters.
+-- Empty hands: tap that same key again, which draws the item back.
+local function toggle_last_slot()
+	local slot = equipped_slot()
+	if slot then
+		last_slot = slot
+		press_slot(slot, true)
+		return
+	end
+	if last_slot then
+		press_slot(last_slot, false)
+	end
+end
+
+-- Actions: 0 none, 1 raise, 2 lower, 3 toggle stance,
+-- 4 holster/draw, 5 holster only, 6 draw last item only.
+local function perform(action)
+    if action >= 1 and action <= 3 then
+        local item = db.actor:active_item()
+        if not weapon_can_stance(item) or not (game and game.actor_lower_weapon) then return end
+        local known, lowered = weapon_is_lowered()
+        if action == 3 and not known then return end
+        local want_lower = action == 2 or (action == 3 and not lowered)
+        -- Notify even when already in the requested pose: sprint may own it.
+        if lws_extended_core and lws_extended_core.set_manual_stance then
+            lws_extended_core.set_manual_stance(want_lower)
+        elseif not known or lowered ~= want_lower then
+            game.actor_lower_weapon(want_lower)
+        end
+    elseif action == 4 then
+        toggle_last_slot()
+    elseif action == 5 then
+        local slot = equipped_slot()
+        if slot then last_slot = slot; press_slot(slot, true) end
+    elseif action == 6 and not equipped_slot() and last_slot then
+        press_slot(last_slot, false)
+    end
+end
+
+local function actor_ready()
+    return db and db.actor and db.actor.alive and db.actor:alive()
+end
+
+local function run_action(action)
+    -- Ignore the synthetic slot-key callbacks generated while holstering.
+    holstering = true
+    local ok, err = pcall(perform, action)
+    holstering = false
+    if not ok then error(err) end
+end
+
+local function handle_wheel(dir, flags)
+    if holstering or not actor_ready() then return end
+    if flags and flags.ret_value == false then return end
+    local opts = get_options()
+    enforce_switch_cvar(opts.enabled)
+    if not opts.enabled or ui_owns_wheel() then return end
+    local item = db.actor:active_item()
+    if zoom_owns_wheel(item) then return end
+    if type(dir) ~= "number" or dir == 0 then return end
+    -- Always consume an assigned wheel notch so no second engine action runs.
+    if flags then flags.ret_value = false end
+    local up = dir > 0
+    if opts.invert then up = not up end
+    local action = up and opts.wheel_up or opts.wheel_down
+    if action == 0 then return end
+    local now = device():time_continual()
+    if last_wheel_at and (now - last_wheel_at) % 4294967296 < opts.wheel_delay then return end
+    last_wheel_at = now
+    run_action(action)
+end
+
+local function handle_lower_key(key, bind, flags)
+    if holstering or not actor_ready() then return end
+    if flags and flags.ret_value == false then return end
+    if ui_owns_wheel() then return end
+    local opts = get_options()
+    local action
+    -- A duplicate binding runs once, with raise/lower/toggle taking priority.
+    if key and key > 0 then
+        if opts.raise_key > 0 and key == opts.raise_key then action = 1
+        elseif opts.lower_key > 0 and key == opts.lower_key then action = 2
+        elseif opts.toggle_key > 0 and key == opts.toggle_key then action = 3
+        end
+    end
+    if not action and opts.holster_key then
+        if opts.holster_source == 1 then
+            if opts.holster_bind > 0 and key == opts.holster_bind then action = opts.holster_action end
+        else
+            if bind == nil and dik_to_bind and key ~= nil then
+                local ok, value = pcall(dik_to_bind, key)
+                if ok then bind = value end
+            end
+            local lower = lower_action_id()
+            if lower and bind == lower then action = opts.holster_action end
+        end
+    end
+    if not action then return end
+    -- Scope/binocular zoom keeps its bound keys as well as its wheel.
+    if action <= 3 and zoom_owns_wheel(db.actor:active_item()) then return end
+    if flags then flags.ret_value = false end
+    if key and held_keys[key] then return end
+    if key then held_keys[key] = true end
+    run_action(action)
+end
+
+-- on_before_key_press(key, bind, dis, flags). Older builds may omit dis.
+local function on_before_key_press(key, bind, third, fourth)
+	local flags = fourth
+	if type(third) == "table" then
+		flags = third
+	end
+	local ok, err = pcall(handle_lower_key, key, bind, flags)
+	if not ok and not logged_error then
+		logged_error = true
+		if printf then
+			printf("! [Scroll Stance] %s", tostring(err))
+		end
+	end
+end
+
+-- The sprint handler must not reinterpret an intercepted stance/holster key.
+function handled_key(key)
+    return held_keys[key] == true
+end
+
+local function on_key_release(key)
+	if key ~= nil then held_keys[key] = nil end
+	-- Slot changes from the number keys land before release. Remember them
+	-- so the lower key can draw that item after a normal holster too.
+	if not holstering then
+		pcall(note_hands)
+	end
+end
+
+local function on_mouse_wheel(dir, flags)
+	local ok, err = pcall(handle_wheel, dir, flags)
+	if not ok and not logged_error then
+		logged_error = true
+		if printf then
+			printf("! [Scroll Stance] %s", tostring(err))
+		end
+	end
+end
+
+local function maintain()
+	if not (db and db.actor) then
+		return true
+	end
+	pcall(function()
+		local opts = get_options()
+		enforce_switch_cvar(opts.enabled)
+		note_hands()
+	end)
+	return true
+end
+
+local function reset_input()
+    held_keys = {}
+    last_wheel_at = nil
+    holstering = false
+end
+
+local function actor_on_first_update()
+    reset_input()
+    last_slot = nil
+    pcall(function()
+        local opts = read_options()
+        enforce_switch_cvar(opts.enabled)
+        note_hands()
+    end)
+    if RemoveTimeEvent then pcall(RemoveTimeEvent, MOD, "enforce") end
+    if CreateTimeEvent then pcall(CreateTimeEvent, MOD, "enforce", 2, maintain) end
+end
+
+local function on_option_change()
+    reset_input()
+    pcall(function()
+        local opts = read_options()
+        enforce_switch_cvar(opts.enabled)
+    end)
+end
+
+local function on_game_load()
+    reset_input()
+    last_slot = nil
+end
+
+function on_game_start()
+	if registered then return end
+	registered = true
+	RegisterScriptCallback("on_mouse_wheel", on_mouse_wheel)
+	RegisterScriptCallback("actor_on_first_update", actor_on_first_update)
+	RegisterScriptCallback("on_option_change", on_option_change)
+	RegisterScriptCallback("on_game_load", on_game_load)
+	RegisterScriptCallback("main_menu_on_init", reset_input)
+	-- Missing on an old exe should not take the wheel feature down with it.
+	pcall(RegisterScriptCallback, "on_before_key_press", on_before_key_press)
+	pcall(RegisterScriptCallback, "on_key_release", on_key_release)
+end
+
+function on_game_end()
+	reset_input()
+	registered = false
+	last_slot = nil
+	if RemoveTimeEvent then
+		pcall(RemoveTimeEvent, MOD, "enforce")
+	end
+	if UnregisterScriptCallback then
+		UnregisterScriptCallback("on_mouse_wheel", on_mouse_wheel)
+		UnregisterScriptCallback("actor_on_first_update", actor_on_first_update)
+		UnregisterScriptCallback("on_option_change", on_option_change)
+		UnregisterScriptCallback("on_game_load", on_game_load)
+		UnregisterScriptCallback("main_menu_on_init", reset_input)
+		pcall(UnregisterScriptCallback, "on_before_key_press", on_before_key_press)
+		pcall(UnregisterScriptCallback, "on_key_release", on_key_release)
+	end
+end

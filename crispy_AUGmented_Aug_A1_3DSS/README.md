@@ -1,15 +1,21 @@
 # AUGmented AUG A1 3DSS Patch
 
+**Version:** `1.0.0`
+
+## Description
+
 Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model, reticle texture and DLTX configuration overrides.
 
-## Functionality
+## Preview
+
+<img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" />
+
+## Features
 
 - Clears the original 2D scope texture.
 - Sets 3DSS dirt intensity, eye relief and reticle size.
 - Adjusts weapon position, fire points, and primary/alternate HUD aim offsets, including the 16:9 entries.
 - Supplies `wpn_aug_a1_hud.ogf` and `wpn/scope/aug/crosshair_dot.dds`.
-
-<img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" />
 
 ## Requirements and compatibility
 
@@ -28,6 +34,6 @@ Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the
 
 ---
 
-[Back to all mods](../README.md)
+[Back to main page](../README.md)
 
 made with ❤️ by SavageBulldogOG

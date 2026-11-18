@@ -1,0 +1,18 @@
+<w>
+    <!-- Match the Item type, By list and By icon panel columns. -->
+    <label x="40" y="6" width="150" height="28" stretch="1">
+        <texture r="0" g="0" b="0" a="150">ui_icons_PDA_tooltips</texture>
+        <text x="-6" font="letterica16" r="250" g="250" b="250" align="r" vert_align="c">Search all items:</text>
+    </label>
+    <search x="200" y="6" width="200" height="28">
+        <text x="5" font="medium" vert_align="c" align="l"/>
+        <texture>ui_inGame2_edit_box_2</texture>
+    </search>
+    <!-- CUITextWnd holds the changing text; a separate static draws its background. -->
+    <count_background x="420" y="6" width="564" height="28" stretch="1">
+        <texture r="0" g="0" b="0" a="150">ui_icons_PDA_tooltips</texture>
+    </count_background>
+    <count x="426" y="6" width="552" height="28">
+        <text font="letterica16" r="200" g="230" b="200" vert_align="c" align="l"/>
+    </count>
+</w>

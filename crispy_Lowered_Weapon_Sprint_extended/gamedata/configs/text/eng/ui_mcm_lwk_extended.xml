@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='windows-1251'?>
+<string_table>
+  <string id="ui_mcm_menu_swrl_scroll_stance">
+    <text>Lowered Weapon Keys</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_enabled">
+    <text>Enable wheel actions</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_enabled_desc">
+    <text>While enabled, the wheel uses the selected actions instead of weapon switching. Disabling this restores wheel weapon switching. Keyboard bindings work independently.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_wheel_up">
+    <text>Scroll up action</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_wheel_up_desc">
+    <text>Choose what scrolling up does. None does nothing outside zoom and menus. The invert option swaps the two directions.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_wheel_down">
+    <text>Scroll down action</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_wheel_down_desc">
+    <text>Choose what scrolling down does. Scope zoom, binocular magnification and PDA/menu scrolling are always preserved.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_invert">
+    <text>Invert scroll directions</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_invert_desc">
+    <text>Swap the scroll up and scroll down actions. Existing inverted-scroll settings are retained.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_wheel_delay">
+    <text>Wheel action delay (milliseconds)</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_wheel_delay_desc">
+    <text>Minimum time between wheel actions, from 0 to 500 milliseconds. Useful to prevent accidental repeated toggles. Zero applies every notch.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_keys_title">
+    <text>STANCE KEYS</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_raise_key">
+    <text>Scroll Stance: raise weapon</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_raise_key_desc">
+    <text>Bind a key to raise the weapon without holstering it. Escape clears the binding. Aim/zoom and menus keep their normal controls.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_lower_key">
+    <text>Scroll Stance: lower weapon</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_lower_key_desc">
+    <text>Bind a key to lower the weapon without holstering it. Escape clears the binding.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_toggle_key">
+    <text>Scroll Stance: toggle raised/lowered</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_toggle_key_desc">
+    <text>Bind one key to switch between raised and lowered stance. It does not holster the weapon. Escape clears the binding.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_title">
+    <text>HOLSTER AND DRAW</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_key">
+    <text>Enable holster/draw key</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_key_desc">
+    <text>Enable the selected holster/draw key and behavior. Turn this off to leave the game Lower/Raise Weapon key unchanged. Wheel holster actions are independent.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_source">
+    <text>Holster/draw key source</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_source_desc">
+    <text>Use the game Lower/Raise Weapon binding (B by default), or select a separate custom binding below. A custom binding leaves the original game key unchanged unless that same key is assigned here.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_bind">
+    <text>Scroll Stance: custom holster/draw key</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_bind_desc">
+    <text>Used only when the key source is Custom key. Escape clears this binding. With no custom key assigned, holstering by custom key is disabled.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_action">
+    <text>Holster/draw key behavior</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_holster_action_desc">
+    <text>Toggle holsters the equipped item or draws the last one. Holster only puts it away; Draw only draws the last item when hands are empty.</text>
+  </string>
+  <string id="ui_mcm_swrl_scroll_stance_desc">
+    <text>Click a key control and press the desired key; Escape clears it. Use different keys for raise, lower, toggle and holster. Duplicate keys run only one action (raise, lower, toggle, then holster). Menus, dialogs, PDA and aiming retain their normal controls. Defaults match the original mod. Custom key bindings require MCM 1.6 or newer.</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_none">
+    <text>None</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_raise">
+    <text>Raise weapon</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_lower">
+    <text>Lower weapon</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_toggle">
+    <text>Toggle raised/lowered</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_holster_toggle">
+    <text>Toggle holster/draw</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_holster">
+    <text>Holster only</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_draw">
+    <text>Draw last item only</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_game_key">
+    <text>Game Lower/Raise Weapon key</text>
+  </string>
+  <string id="ui_mcm_lst_swrl_custom_key">
+    <text>Custom key</text>
+  </string>
+</string_table>

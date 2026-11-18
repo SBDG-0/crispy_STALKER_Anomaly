@@ -1,0 +1,99 @@
+-- Extend the installed launcher without replacing its script or layout.
+local installed = false
+
+local function normalize(value)
+    return string.lower(value or ""):gsub("^%s+", ""):gsub("%s+$", "")
+end
+
+local function matches(text, query)
+    for word in query:gmatch("%S+") do
+        if not string.find(text, word, 1, true) then return false end
+    end
+    return true
+end
+
+local function refresh(self)
+    local launcher = ui_debug_launcher
+    local query = normalize(self.crispy_search:GetText())
+    self.crispy_query = query
+    local rows, seen = {}, {}
+    -- A nonempty query searches every existing spawner category.
+    for index, category in ipairs(launcher.itm_to_spawn_table) do
+        if query ~= "" or index == self.index then
+            for _, item in ipairs(launcher.get_spawn_table(category) or {}) do
+                local sec = item.sec
+                if not seen[sec] and ini_sys:section_exist(sec) then
+                    seen[sec] = true
+                    local key = ini_sys:r_string_ex(sec, "inv_name") or sec
+                    local name = game.translate_string(key) or key
+                    if matches(normalize(sec .. " " .. name), query) then
+                        rows[#rows + 1] = {sec = sec, name = name}
+                    end
+                end
+            end
+        end
+    end
+    table.sort(rows, function(a, b) return a.sec < b.sec end)
+    self.list:RemoveAll()
+    local sections = {}
+    for _, row in ipairs(rows) do
+        local entry = launcher.list_element(row.sec, self.list:GetWidth(), 22, 5, row.sec, nil)
+        self.list:AddExistingItem(entry)
+        entry:SetTextColor(GetARGB(255, 150, 150, 250))
+        sections[#sections + 1] = row.sec
+    end
+    self.d2_CC:Reinit(sections)
+    for _, cell in pairs(self.d2_CC.cell) do
+        if cell:IsShown() then cell.flags.note_str = cell.section end
+    end
+    self.crispy_count:SetText(tostring(#sections) .. " results")
+end
+
+function on_game_start()
+    if installed then return end
+    local cls = ui_debug_launcher.UIDebug_ItemSpawn
+    local controls, update, init_items, keyboard = cls.InitControls, cls.Update, cls.InitItems, cls.OnKeyboard
+    cls.InitControls = function(self, ...)
+        controls(self, ...)
+        local xml = CScriptXmlInit()
+        xml:ParseFile("crispy_debug_item_search.xml")
+        self.crispy_search_label = xml:InitStatic("label", self)
+        self.crispy_search = xml:InitEditBox("search", self)
+        self.crispy_count_background = xml:InitStatic("count_background", self)
+        self.crispy_count = xml:InitTextWnd("count", self)
+        self.crispy_query = ""
+        self.crispy_count:SetText("Choose a category or search")
+    end
+    cls.InitItems = function(self, index)
+        if not self.crispy_search then return init_items(self, index) end
+        self.index = index
+        refresh(self)
+    end
+    cls.Update = function(self, ...)
+        local result = update(self, ...)
+        if self.crispy_search then
+            local query = normalize(self.crispy_search:GetText())
+            if query ~= self.crispy_query then
+                -- Debounce typing to avoid rebuilding thousands of cells per keystroke.
+                if query ~= self.crispy_pending then
+                    self.crispy_pending = query
+                    self.crispy_due = time_global() + 250
+                elseif time_global() >= self.crispy_due then
+                    refresh(self)
+                    self.crispy_pending = nil
+                end
+            else
+                self.crispy_pending = nil
+            end
+        end
+        return result
+    end
+    cls.OnKeyboard = function(self, dik, action)
+        -- Vanilla Home spawns the entire category, even when hidden by search.
+        if self.crispy_search and normalize(self.crispy_search:GetText()) ~= "" and dik == DIK_keys.DIK_HOME then
+            return CUIScriptWnd.OnKeyboard(self, dik, action)
+        end
+        return keyboard(self, dik, action)
+    end
+    installed = true
+end

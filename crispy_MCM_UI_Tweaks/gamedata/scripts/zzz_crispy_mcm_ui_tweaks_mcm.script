@@ -1,0 +1,39 @@
+-- Single MCM entry point. Add future components to this registry.
+VERSION = "1.0.0"
+local components = {
+    {module="crispy_mcm_ui_back_forth", title="ui_mcm_tweaks_back_forth"},
+    {module="crispy_mcm_ui_cmc", title="ui_mcm_tweaks_cmc"},
+}
+
+local function prepare_tab(tab, title)
+    tab.text=title
+    local config=axr_main and axr_main.config
+    local changed=false
+    for _,control in ipairs(tab.gr) do
+        if control.val~=nil then
+            control.hint=control.hint or (tab.id.."_"..control.id)
+            if config then
+                local old_path=tab.id.."/"..control.id
+                local new_path="crispy_mcm_ui_tweaks/"..old_path
+                if config:r_value("mcm",new_path,control.val)==nil then
+                    local previous=config:r_value("mcm",old_path,control.val)
+                    if previous~=nil then
+                        config:w_value("mcm",new_path,previous)
+                        changed=true
+                    end
+                end
+            end
+        end
+    end
+    if changed then config:save() end
+    return tab
+end
+
+function on_mcm_load()
+    local tabs={}
+    for _,component in ipairs(components) do
+        local module=_G[component.module]
+        tabs[#tabs+1]=prepare_tab(module.build_tab(),component.title)
+    end
+    return {id="crispy_mcm_ui_tweaks",gr=tabs}
+end

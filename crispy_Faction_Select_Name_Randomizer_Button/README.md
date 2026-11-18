@@ -1,10 +1,16 @@
 # Faction Select Name Randomizer Button
 
+**Version:** `1.0.0`
+
+## Description
+
 Adds a separate random-name button beside the character name field on the new-game faction selection screen. It changes only the name, keeping the selected faction and other starting choices.
+
+## Preview
 
 <img src="https://github.com/user-attachments/assets/9870052f-6fa9-4e51-a6d3-059819375ab1" alt="Faction selection with the separate random-name button" width="900" />
 
-## Functionality
+## Features
 
 - Uses the current faction and Anomaly's translated first/last-name pools.
 - Army, Duty and UNISG use military rank name pools; other factions use stalker, bandit and science pools.
@@ -26,6 +32,6 @@ Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the
 
 ---
 
-[Back to all mods](../README.md)
+[Back to main page](../README.md)
 
 made with ❤️ by SavageBulldogOG

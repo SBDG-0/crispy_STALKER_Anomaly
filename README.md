@@ -1,8 +1,12 @@
 # Crispy S.T.A.L.K.E.R. Anomaly
 
+## Description
+
 Fixes, patches, and small mods for [S.T.A.L.K.E.R. Anomaly](https://www.moddb.com/mods/stalker-anomaly).
 
 Use [STALKER-Anomaly-modded-exes](https://github.com/themrdemonized/xray-monolith#stalker-anomaly-modded-exes) for best overall compatibility.
+
+## Preview
 
 <img src="https://github.com/user-attachments/assets/5b517125-dc69-40f5-8655-714b6b321ba7" alt="S.T.A.L.K.E.R. Anomaly mod preview" width="900" />
 
@@ -12,19 +16,31 @@ Use [STALKER-Anomaly-modded-exes](https://github.com/themrdemonized/xray-monolit
 2. Install it as a separate mod in Mod Organizer 2 (MO2).
 3. Enable it and follow the requirements and conflict-priority instructions in its README.
 
-More detailed instructions and information can be found in the README file included with each mod.
+More detailed instructions and information can be found in each mod’s README in this repository. Download ZIPs contain only `gamedata/` and `meta.ini`; README files are excluded.
 
 ## Mods
 
 ### [Stealth + Ghillie Rework Compatibility Patch](crispy_Stealth_2.31_Ghillie_Rework_1.2_Compatibility_Patch/README.md)
 
+**Version:** `1.0.0`
+
 Compatibility patch for Stealth v2.31 and Ghillie Rework v1.2.
 
 ### [MCM Remembers Last Tab + Custom Mod Categories Compatibility Patch](crispy_MCM_Remembers_Last_Tab_CMC_Patch/README.md)
 
+**Version:** `1.1.0`
+
 Custom Mod Categories v1.1.1 compatibility for MCM Remembers Last Tab v1.2.
 
+### [MCM UI Tweaks](crispy_MCM_UI_Tweaks/README.md)
+
+**Version:** `1.0.0`
+
+Combines Back and Forth button positioning and Custom Mod Categories dropdown positioning in one MCM menu with two tabs. Replaces the two standalone position patches when enabled.
+
 ### [Back and Forth Button Position Patch](crispy_Back_and_Forth_Button_Position_Patch/README.md)
+
+**Version:** `1.3.0`
 
 MCM controls for repositioning the Back and Forth buttons.
 
@@ -32,11 +48,15 @@ MCM controls for repositioning the Back and Forth buttons.
 
 ### [Custom Mod Categories Dropdown Position Patch](crispy_CMC_Dropdown_Position_Patch/README.md)
 
+**Version:** `1.3.0`
+
 MCM controls for repositioning the CMC dropdown and its labels.
 
 <img src="https://github.com/user-attachments/assets/d5e4ee85-4fc2-4d3d-86ec-c3945e3053f3" alt="Custom Mod Categories dropdown position settings" width="900" />
 
 ### [Custom Loading Screen Background for Multiplayer](crispy_Custom_Loading_Screen_BG_For_MP/README.md)
+
+**Version:** `1.0.0`
 
 Replaces the loading-screen background with artwork selected for multiplayer.
 
@@ -44,11 +64,15 @@ Replaces the loading-screen background with artwork selected for multiplayer.
 
 ### [Fatal Error + Milspec PDA MCM Text String Patch](crispy_Fatal_Error_PDA_Milspec_MCM_Fix/README.md)
 
+**Version:** `1.0.0`
+
 Fixes missing MCM text and improves wording for Fatal Error and Milspec PDA.
 
 <img src="https://github.com/user-attachments/assets/ff554476-65f3-45ba-854a-e754bc4f5ce2" alt="Corrected Fatal Error and Milspec PDA MCM text" width="900" />
 
 ### [Pizza's Ultimate Sight Selection for Anomaly Magnifier MCM Text Patch](crispy_PUSSy_Magnifier_MCM_Text_Patch/README.md)
+
+**Version:** `1.0.0`
 
 Adds missing English and Russian MCM strings for the magnifier script.
 
@@ -56,11 +80,15 @@ Adds missing English and Russian MCM strings for the magnifier script.
 
 ### [Sota UI Rework MAS DevKit Ultrawide Patch](crispy_Sota_UI_Rework_MAS_DevKit_Ultrawide_Patch/README.md)
 
+**Version:** `1.0.0`
+
 Adjusts the layout on the draggable HUD editor for ultrawide displays.
 
 <img src="https://github.com/user-attachments/assets/1219366c-9ea4-4da9-a24f-fb91b4b8195a" alt="Ultrawide MAS DevKit HUD editor layout" width="900" />
 
 ### [Faction Select Name Randomizer Button](crispy_Faction_Select_Name_Randomizer_Button/README.md)
+
+**Version:** `1.0.0`
 
 Adds a separate random-name button beside the character name field on the new-game faction selection screen. It changes only the name, keeping the selected faction and other starting choices.
 
@@ -68,17 +96,23 @@ Adds a separate random-name button beside the character name field on the new-ga
 
 ### [NiS Faction Relations Bullet Fix](crispy_NiS_xml_fix/README.md)
 
+**Version:** `1.0.0`
+
 Repairs the malformed bullet character displayed in faction relationship descriptions on the new-game faction selection screen.
 
 <img src="https://github.com/user-attachments/assets/b93af64d-8685-4f5d-9516-2cf765f14060" alt="NiS Bullet Fix" width="900" />
 
 ### [AUGmented AUG A1 3DSS Patch](crispy_AUGmented_Aug_A1_3DSS/README.md)
 
+**Version:** `1.0.0`
+
 Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model, reticle texture and DLTX configuration overrides.
 
 <img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" />
 
 ### [Auto Wipe Mask in Intervals](crispy_Auto_Wipe_Mask_in_Intervals/README.md)
+
+**Version:** `1.0.0`
 
 Toggles repeated mask wiping at a configurable interval using Anomaly's existing mask-cleaning function.
 
@@ -88,15 +122,21 @@ Toggles repeated mask wiping at a configurable interval using Anomaly's existing
 
 ### [Load Ready Lite](crispy_Load_Ready_lite/README.md)
 
+**Version:** `1.0.0`
+
 Plays one notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
 
 ### [Load Ready — R1nk1 / Crispy Clean Variant](crispy_Load_Ready_R1nk1/README.md)
+
+**Version:** `1.4.0`
 
 An edited version of R1nk1's Load Ready that signals when loading finishes, with configurable audio and a choice between waiting for player input and automatic entry.
 
 https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1
 
 ### [Vanilla Options Script Improvements](crispy_Options_script_improvements_Vanilla/README.md)
+
+**Version:** `1.0.0`
 
 Replaces Anomaly's vanilla options-menu script with adjusted slider limits and finer control, plus a runtime label change identifying the expanded carry-weight slider.
 
@@ -107,6 +147,20 @@ Replaces Anomaly's vanilla options-menu script with adjusted slider limits and f
 <img src="https://github.com/user-attachments/assets/41ec474c-ff25-47cb-9d16-f45108987a55" alt="Expanded gameplay options" width="900" />
 
 <img src="https://github.com/user-attachments/assets/5595a69d-644f-4b08-a739-898926c7f7e8" alt="Additional gameplay options" width="900" />
+
+### [Lowered Weapon Sprint Extended](crispy_Lowered_Weapon_Sprint_extended/README.md)
+
+**Version:** `1.0.0`
+
+Combines automatic sprint lowering, adjustable weapon poses, and configurable wheel/key stance and holster controls in one addon with two MCM settings tabs.
+
+### [Item Spawner Search Box](crispy_Item_Spawner_Search_Box/README.md)
+
+**Version:** `1.0.2`
+
+Search the debug item spawner by display name or section ID across all categories, with synchronized list/grid results.
+
+---
 
 ## Reuse
 

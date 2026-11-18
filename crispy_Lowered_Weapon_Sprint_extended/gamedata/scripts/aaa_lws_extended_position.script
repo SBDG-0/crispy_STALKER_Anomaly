@@ -1,0 +1,265 @@
+-- Sprint Weapon Suite: independent position, pitch and yaw profiles.
+-- Runtime-only additive lowered offset. No weapon configs, DLTX or disk writes.
+-- Legacy Modded Exes uses a shared HUD adjustment table. Observe that API so
+-- other mods retain their own vectors and adjustment-mode requests.
+local opts, registered, failed = nil, false, false
+local raw_enabled, raw_vector, raw_value, hook_enabled, hook_vector
+local external_enabled = false
+local external_snapshot
+local function owner_key()
+    local item=db and db.actor and db.actor:active_item()
+    if not item then return nil end
+    local wide=utils_xml and utils_xml.is_widescreen and utils_xml.is_widescreen() or false
+    return tostring(item:id())..":"..item:section()..":"..tostring(wide)
+end
+local active, context, current = false, nil, {0,0,0,0,0}
+local blend_from, blend_target, blend_at
+local warned = false
+local combat_at
+
+local function log(message)
+    if type(printf) == "function" then printf("[Sprint Weapon Suite Position] %s", tostring(message)) end
+end
+
+local function read_options()
+    opts = lws_extended_mcm.read()
+end
+
+local function nonzero(v)
+    return math.abs(v[1]) + math.abs(v[2]) + math.abs(v[3]) + math.abs(v[4]) + math.abs(v[5]) > 0.00001
+end
+
+local function write_position()
+    local p,r,index=context.base,context.rotation,context.index
+    raw_vector(0,index,p[1]+current[1],p[2]+current[2],p[3]+current[3])
+    raw_vector(1,index,r[1]+current[5],r[2]+current[4],r[3])
+end
+
+local function release()
+    if active then
+        -- Restore only our lowered-position contribution, never another mod's
+        -- hands/aim/fire-point values, and honor its last mode request.
+        raw_vector(0, context.index, context.base[1], context.base[2], context.base[3])
+        raw_vector(1, context.index, context.rotation[1], context.rotation[2], context.rotation[3])
+        raw_enabled(external_enabled)
+    end
+    active, context = false, nil
+    blend_from, blend_target, blend_at = nil, nil, nil
+    current = {0,0,0,0,0}
+end
+
+local function install_hooks()
+    if hook_enabled then return true end
+    if not (hud_adjust and type(hud_adjust.enabled) == "function"
+        and type(hud_adjust.set_vector) == "function" and type(hud_adjust.set_value) == "function") then
+        if not warned then log("Modded Exes HUD adjustment interface unavailable; disabled."); warned=true end
+        return false
+    end
+    raw_enabled, raw_vector, raw_value = hud_adjust.enabled, hud_adjust.set_vector, hud_adjust.set_value
+    hook_enabled = function(value)
+        external_enabled = value and true or false
+        return raw_enabled(active or external_enabled)
+    end
+    hook_vector = function(kind, index, x, y, z)
+        if index==0 and (kind==0 or kind==1) then
+            local key=owner_key()
+            if not external_snapshot or external_snapshot.key~=key then external_snapshot={key=key} end
+            external_snapshot[kind]={x,y,z}
+        end
+        if active and index == context.index then
+            if kind == 0 then
+                context.base = {x,y,z}
+                return raw_vector(kind,index,x+current[1],y+current[2],z+current[3])
+            elseif kind == 1 then
+                context.rotation = {x,y,z}
+                return raw_vector(kind,index,x+current[5],y+current[4],z)
+            end
+        end
+        return raw_vector(kind,index,x,y,z)
+    end
+    hud_adjust.enabled, hud_adjust.set_vector = hook_enabled, hook_vector
+    return true
+end
+
+local function read_string(section, key)
+    if not section or not ini_sys:section_exist(section) or not ini_sys:line_exist(section,key) then return nil end
+    return ini_sys:r_string(section,key)
+end
+
+local function vector_from_config(section, key, wide, no_wide, fallback)
+    local text
+    if wide and not no_wide then text = read_string(section,key.."_16x9") end
+    text = text or read_string(section,key)
+    local out = {}
+    if text then
+        for part in tostring(text):gmatch("[^,]+") do out[#out+1] = tonumber(part) or 0 end
+    end
+    for i=1,3 do out[i] = out[i] or (fallback and fallback[i]) or 0 end
+    return out
+end
+
+-- Legacy adjustment mode substitutes all of these fields. Seed them with the
+-- current weapon's inherited config values, including aspect-ratio fallback.
+-- Existing owners are never reseeded: their runtime adjustments take priority.
+local fields = {
+    {0,0,"hands_position"}, {1,0,"hands_orientation"},
+    {0,1,"aim_hud_offset_pos"}, {1,1,"aim_hud_offset_rot"},
+    {0,2,"gl_hud_offset_pos"}, {1,2,"gl_hud_offset_rot"},
+    {0,3,"aim_hud_offset_alt_pos"}, {1,3,"aim_hud_offset_alt_rot"},
+    {0,4,"lowered_hud_offset_pos"}, {1,4,"lowered_hud_offset_rot"},
+    {0,5,"base_hud_offset_pos"}, {1,5,"base_hud_offset_rot"},
+    {0,10,"fire_point",true}, {0,11,"fire_point2",true},
+    {1,10,"fire_direction",true,{0,0,1}}, {1,11,"shell_point",true},
+    {0,12,"item_position",true}, {1,12,"item_orientation",true},
+    {0,20,"custom_ui_pos"}, {1,20,"custom_ui_rot"},
+}
+
+local function seed(ctx)
+    for _, field in ipairs(fields) do
+        local p = vector_from_config(ctx.hud,field[3],ctx.wide,field[4],field[5])
+        raw_vector(field[1],field[2],p[1],p[2],p[3])
+    end
+    for _, key in ipairs({"scope_zoom_factor","gl_zoom_factor","scope_zoom_factor_alt"}) do
+        raw_value(key, tonumber(read_string(ctx.hud,key)) or 0)
+    end
+    -- This module never changes FOV, stance, world camera or animations.
+end
+
+local function is_wide()
+    return utils_xml and utils_xml.is_widescreen and utils_xml.is_widescreen() or false
+end
+
+local function move_state(name)
+    return type(IsMoveState) == "function" and IsMoveState(name) or false
+end
+
+local function eligible()
+    if not opts.positions_enabled or not (db and db.actor and db.actor:alive()) then return nil end
+    if combat_at and (device():time_continual()-combat_at)%4294967296 < 120 then return nil end
+    if device():is_paused() or (db.actor.is_talking and db.actor:is_talking()) then return nil end
+    if level and level.main_input_receiver and level.main_input_receiver() ~= nil then return nil end
+    if ActorMenu and ActorMenu.IsShown and ActorMenu:IsShown() then return nil end
+    local item = db.actor:active_item()
+    if not item or not IsWeapon(item) then return nil end
+    local slot = db.actor:active_slot()
+    if slot == 8 or slot == 14 then return nil end
+    local sec = item:section()
+    if sec:find("binoc",1,true) or (IsMelee and IsMelee(item)) then return nil end
+    local weapon = item.cast_Weapon and item:cast_Weapon() or nil
+    if weapon then
+        if weapon.IsZoomed and weapon:IsZoomed() then return nil end
+        if weapon.is_zoomed and weapon:is_zoomed() then return nil end
+    end
+    local state = item:get_state()
+    if state ~= 0 and state ~= 3 then return nil end
+    -- Crouched slide and cover tilt have their own poses. Give them priority.
+    if move_state("mcCrouch") or move_state("mcClimb") then return nil end
+    if weapon_cover_tilt and weapon_cover_tilt.is_tilt_enabled and weapon_cover_tilt.is_tilt_enabled() then return nil end
+    local hud = read_string(sec,"hud")
+    if not hud then return nil end
+    return item, hud
+end
+
+local function update()
+    if failed or not raw_enabled then return end
+    if not opts then read_options() end
+    local item, hud = eligible()
+    if not item then release(); return end
+    local wide = is_wide()
+    local lowered = game.actor_weapon_lowered()
+    local sprint = move_state("mcSprint")
+    local profile = sprint and (lowered and "lower_sprint" or "normal_sprint") or (lowered and "lower_idle" or nil)
+    -- All three profiles are independently editable, never stacked.
+    -- One common hands layer survives lowered/raised state changes. Keeping
+    -- it alive lets the outgoing sprint correction blend all the way to zero.
+    local index = 0
+    local identity = tostring(item:id())..":"..hud..":"..tostring(wide)..":"..index
+    if context and context.identity ~= identity then release() end
+    if not profile and not active then return end
+    if not context then
+        context = {identity=identity,hud=hud,wide=wide,index=index,
+            base=vector_from_config(hud,"hands_position",wide),
+            rotation=vector_from_config(hud,"hands_orientation",wide)}
+    end
+    if not active and external_enabled and external_snapshot and external_snapshot.key==owner_key() then
+        context.base=external_snapshot[0] or context.base
+        context.rotation=external_snapshot[1] or context.rotation
+    end
+    local target = {0,0,0,0,0}
+    if profile and opts[profile.."_enabled"] then
+        for i,key in ipairs({"x","y","z"}) do target[i]=opts[profile.."_"..key]/100 end
+        -- Common hands orientation uses heading/pitch/bank in degrees.
+        target[4]=opts[profile.."_pitch"]
+        target[5]=opts[profile.."_yaw"]
+    end
+    if not active and not nonzero(target) then context=nil; return end
+    local now = device():time_continual()
+    if not blend_target or target[1] ~= blend_target[1] or target[2] ~= blend_target[2] or target[3] ~= blend_target[3] or target[4] ~= blend_target[4] or target[5] ~= blend_target[5] then
+        blend_from, blend_target, blend_at = {current[1],current[2],current[3],current[4],current[5]}, target, now
+    end
+    local elapsed = (now-blend_at) % 4294967296
+    local step = opts.transition == 0 and 1 or math.min(1,elapsed/opts.transition)
+    step = step*step*(3-2*step)
+    for i=1,5 do
+        current[i] = blend_from[i]+(target[i]-blend_from[i])*step
+    end
+    if not nonzero(current) and not nonzero(target) then release(); return end
+    if not active then
+        if not external_enabled then seed(context) end
+        active = true
+    end
+    raw_enabled(true)
+    write_position()
+end
+
+local function safe_update()
+    if lws_extended_core and lws_extended_core.synchronize then lws_extended_core.synchronize() end
+    local ok, err = pcall(update)
+    if not ok then
+        pcall(release)
+        failed = true
+        log("Disabled after an adjustment error: "..tostring(err))
+    end
+end
+
+local function reset()
+    release()
+    failed = false
+end
+
+local function option_change()
+    read_options()
+    if not opts.positions_enabled then release() end
+    failed = false
+end
+
+local function input_priority(key)
+    if not key_bindings or not bind_to_dik then return end
+    for _,name in ipairs({"kWPN_FIRE","kWPN_RELOAD","kWPN_ZOOM"}) do
+        if key_bindings[name] and key==bind_to_dik(key_bindings[name]) then
+            combat_at=device():time_continual()
+            release()
+            return
+        end
+    end
+end
+
+function on_game_start()
+    if registered or not install_hooks() then return end
+    registered = true
+    read_options()
+    RegisterScriptCallback("actor_on_update",safe_update)
+    RegisterScriptCallback("on_key_press",input_priority)
+    RegisterScriptCallback("on_option_change",option_change)
+    RegisterScriptCallback("on_game_load",reset)
+    RegisterScriptCallback("main_menu_on_init",reset)
+    RegisterScriptCallback("actor_on_before_death",reset)
+    RegisterScriptCallback("actor_on_net_destroy",reset)
+    RegisterScriptCallback("actor_on_weapon_zoom_in",reset)
+end
+
+function on_game_end()
+    release()
+    -- Keep observers installed across sessions: another mod may have wrapped
+    -- them too. They are transparent whenever this mod owns no offset.
+end

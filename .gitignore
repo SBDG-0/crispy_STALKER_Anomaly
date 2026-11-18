@@ -6,3 +6,6 @@
 
 # Track top-level crispy_ folders and everything inside them.
 !/crispy_*/
+
+# Track release workflows and packaging validation.
+!/.github/
