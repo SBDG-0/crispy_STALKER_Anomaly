@@ -1,0 +1,2 @@
+*.script linguist-language=Lua linguist-detectable=true
+*.ltx linguist-language=INI linguist-detectable=true

@@ -1,10 +1,10 @@
-# NiS Faction Relations Bullet Fix
+# NiS XML and Faction Relations Fix
 
 **Version:** `1.0.0`
 
 ## Description
 
-Repairs the malformed bullet character displayed in faction relationship descriptions on the new-game faction selection screen.
+Repairs malformed bullets in faction relationship descriptions and supplies replacement English item string tables for ammo, glowsticks, and medical items.
 
 ## Preview
 
@@ -12,11 +12,13 @@ Repairs the malformed bullet character displayed in faction relationship descrip
 
 ## Features
 
+- Includes `st_items_ammo_new.xml`, `st_items_glowstick.xml`, and `zzz_st_items_medical.xml` under `gamedata/configs/text/eng/`. These are complete string tables, not runtime patches.
+
 After the original `UINewGame:UpdateDescr` runs, replaces UTF-8 replacement-character bytes in the relationship text with the Windows-1251 bullet expected by the game's font. When replacements occur, recalculates the text height.
 
 ## Requirements and compatibility
 
-Requires Anomaly and [Modded Exes](https://github.com/themrdemonized/xray-monolith) supporting the ModXML script entry point and `main_menu_on_init` callback. No settings or MCM dependency. This is specifically a faction-relations text fix; it does not repair every possible NiS/encoding issue elsewhere in the game. A replacement faction menu must retain `UINewGame`, `UpdateDescr` and `text_relations`.
+Requires Anomaly and [Modded Exes](https://github.com/themrdemonized/xray-monolith) supporting the ModXML script entry point and `main_menu_on_init` callback. No settings or MCM dependency. The runtime hook specifically fixes faction-relations text. The bundled English string tables replace files with the same names; merge them if another addon changes those files. This does not repair every possible NiS/encoding issue elsewhere in the game. A replacement faction menu must retain `UINewGame`, `UpdateDescr` and `text_relations`.
 
 ## Credits
 

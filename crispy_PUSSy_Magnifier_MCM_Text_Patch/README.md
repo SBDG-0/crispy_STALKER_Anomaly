@@ -26,9 +26,9 @@ No original mod files are changed by this patch.
 
 ## Reuse
 
-This software is provided "as is", without warranty of any kind. It is free to use, modify, and distribute provided you credit the author (SavageBulldog) and include a link back to the original repository.
+This software is provided “as is”, without warranty of any kind. You may use, modify, and distribute it, provided you credit SavageBulldogOG and include a link to this repository.
 
-[Original repository](https://github.com/SBDG-0/crispy_stalker_anomaly)
+[crispy_stalker_anomaly](https://github.com/SBDG-0/crispy_stalker_anomaly)
 
 ---
 

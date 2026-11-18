@@ -1,11 +1,23 @@
-# Ignore everything at the repository root by default.
+# Keep only distribution sources and shared repository files at the root.
 /*
-
-# Keep this configuration tracked.
 !/.gitignore
-
-# Track top-level crispy_ folders and everything inside them.
+!/.gitattributes
+!/README.md
 !/crispy_*/
-
-# Track release workflows and packaging validation.
 !/.github/
+
+# Generated files, local configuration and credentials at any depth.
+__pycache__/
+*.py[cod]
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db

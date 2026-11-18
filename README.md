@@ -36,21 +36,11 @@ Custom Mod Categories v1.1.1 compatibility for MCM Remembers Last Tab v1.2.
 
 **Version:** `1.0.0`
 
-Combines Back and Forth button positioning and Custom Mod Categories dropdown positioning in one MCM menu with two tabs. Replaces the two standalone position patches when enabled.
+Combines Back and Forth button positioning and Custom Mod Categories dropdown positioning in one MCM menu with two tabs. Disable both former standalone position patches when enabling this combined addon.
 
-### [Back and Forth Button Position Patch](crispy_Back_and_Forth_Button_Position_Patch/README.md)
-
-**Version:** `1.3.0`
-
-MCM controls for repositioning the Back and Forth buttons.
+The screenshots below show the original standalone controls, now grouped under MCM UI Tweaks.
 
 <img src="https://github.com/user-attachments/assets/3848a52b-f745-447b-8aae-19f334947130" alt="Back and Forth button position settings" width="900" />
-
-### [Custom Mod Categories Dropdown Position Patch](crispy_CMC_Dropdown_Position_Patch/README.md)
-
-**Version:** `1.3.0`
-
-MCM controls for repositioning the CMC dropdown and its labels.
 
 <img src="https://github.com/user-attachments/assets/d5e4ee85-4fc2-4d3d-86ec-c3945e3053f3" alt="Custom Mod Categories dropdown position settings" width="900" />
 
@@ -94,11 +84,11 @@ Adds a separate random-name button beside the character name field on the new-ga
 
 <img src="https://github.com/user-attachments/assets/9870052f-6fa9-4e51-a6d3-059819375ab1" alt="Faction selection with the separate random-name button" width="900" />
 
-### [NiS Faction Relations Bullet Fix](crispy_NiS_xml_fix/README.md)
+### [NiS XML and Faction Relations Fix](crispy_NiS_xml_fix/README.md)
 
 **Version:** `1.0.0`
 
-Repairs the malformed bullet character displayed in faction relationship descriptions on the new-game faction selection screen.
+Repairs malformed faction-relations bullets at runtime and includes replacement English ammo, glowstick, and medical item string tables. These full string-table files can conflict with other localization mods.
 
 <img src="https://github.com/user-attachments/assets/b93af64d-8685-4f5d-9516-2cf765f14060" alt="NiS Bullet Fix" width="900" />
 
@@ -125,12 +115,6 @@ Toggles repeated mask wiping at a configurable interval using Anomaly's existing
 **Version:** `1.0.0`
 
 Plays one notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
-
-### [Load Ready — R1nk1 / Crispy Clean Variant](crispy_Load_Ready_R1nk1/README.md)
-
-**Version:** `1.4.0`
-
-An edited version of R1nk1's Load Ready that signals when loading finishes, with configurable audio and a choice between waiting for player input and automatic entry.
 
 https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1
 
@@ -160,13 +144,34 @@ Combines automatic sprint lowering, adjustable weapon poses, and configurable wh
 
 Search the debug item spawner by display name or section ID across all categories, with synchronized list/grid results.
 
+## Updates and migration
+
+This checkout contains 15 independently versioned mods. The two standalone MCM position patches have been replaced by **MCM UI Tweaks**. The full **Load Ready — R1nk1 / Crispy Clean Variant** is no longer included; **Load Ready Lite** provides the notification-only alternative. Disable older copies before enabling replacements. Historical versions remain in Git history and previous releases where available.
+
+## Building release ZIPs
+
+From the repository root, using Python 3.13 (the workflow version):
+
+```console
+python .github/scripts/test_package_mods.py
+python .github/scripts/package_mods.py
+```
+
+The builder validates each mod's metadata and README version, creates one ZIP per `crispy_` folder in `.releases/`, and checks ZIP contents and CRC integrity. Each archive contains `meta.ini` and the mod's `gamedata/` payload directly; README files are excluded at every depth. These checks do not establish in-game compatibility.
+
+The single release workflow publishes packages when a `v*` tag is pushed. A manual workflow run builds downloadable artifacts without publishing a release. Repository release tags identify the collection; individual mod versions remain those recorded in their README and `meta.ini`.
+
+## Third-party content
+
+Keep each mod's upstream credits and restrictions. Some bundled assets have incomplete provenance recorded in their individual READMEs. The reuse statement below applies to the author's contributions and does not override third-party terms.
+
 ---
 
 ## Reuse
 
-This software is provided "as is", without warranty of any kind. It is free to use, modify, and distribute provided you credit the author (SavageBulldog) and include a link back to the original repository.
+This software is provided “as is”, without warranty of any kind. You may use, modify, and distribute it, provided you credit SavageBulldogOG and include a link to this repository.
 
-[Original repository](https://github.com/SBDG-0/crispy_stalker_anomaly)
+[crispy_stalker_anomaly](https://github.com/SBDG-0/crispy_stalker_anomaly)
 
 ---
 

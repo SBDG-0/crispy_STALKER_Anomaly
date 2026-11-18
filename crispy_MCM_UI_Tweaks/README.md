@@ -38,7 +38,7 @@ Each component only adjusts controls supplied by its corresponding addon. If tha
 3. Enable **crispy_MCM_UI_Tweaks** and restart the game.
 4. Open **MCM UI Tweaks**, choose a tab, adjust the offsets, and press **Apply**.
 
-Do not enable the standalone position patches alongside this combined addon: their wrappers would adjust the same controls twice. Their source folders remain available in the repository for existing users.
+Do not enable the standalone position patches alongside this combined addon: their wrappers would adjust the same controls twice. Their source folders have been removed from this checkout; historical versions remain in Git history.
 
 ## Compatibility and limitations
 
