@@ -142,19 +142,6 @@ Replaces Anomaly's vanilla options-menu script with adjusted slider limits and f
 
 <img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
 
-## Building release ZIPs
-
-From the repository root, using Python 3.13 (the workflow version):
-
-```console
-python .github/scripts/test_package_mods.py
-python .github/scripts/package_mods.py
-```
-
-The builder validates each mod's metadata and README version, creates one ZIP per `crispy_` folder in `.releases/`, and checks ZIP contents and CRC integrity. Each archive contains `meta.ini` and the mod's `gamedata/` payload directly; README files are excluded at every depth. These checks do not establish in-game compatibility.
-
-The single release workflow publishes packages when a `v*` tag is pushed. A manual workflow run builds downloadable artifacts without publishing a release. Repository release tags identify the collection; individual mod versions remain those recorded in their README and `meta.ini`.
-
 ## Third-party content
 The reuse statement below applies to the author's contributions and does not override third-party terms.
 
