@@ -50,6 +50,7 @@ jobs:
           name: crispy-mod-zips
           path: .releases/*.zip
           if-no-files-found: error
+          include-hidden-files: true
 
       - name: Publish tagged GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
