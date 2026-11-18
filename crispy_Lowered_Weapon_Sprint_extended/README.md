@@ -79,7 +79,7 @@ Aiming, firing, reloads, crouching/sliding, and active Cover Tilt take priority 
 
 ## Validation
 
-LuaJIT checks cover script syntax, manual stance ownership during sprinting, wheel/key integration, and reset behavior. XML files are checked for valid structure and duplicate string IDs. Visual alignment, actual input propagation, firing/reload transitions, and interaction with your full modpack still need in-game testing.
+LuaJIT checks cover script syntax, manual stance ownership during sprinting, wheel/key integration, and reset behavior. XML files are checked for valid structure and duplicate string IDs.
 
 ## Credits
 

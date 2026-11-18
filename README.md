@@ -142,10 +142,6 @@ Replaces Anomaly's vanilla options-menu script with adjusted slider limits and f
 
 <img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
 
-<img src="https://github.com/user-attachments/assets/41ec474c-ff25-47cb-9d16-f45108987a55" alt="Expanded gameplay options" width="900" />
-
-<img src="https://github.com/user-attachments/assets/5595a69d-644f-4b08-a739-898926c7f7e8" alt="Additional gameplay options" width="900" />
-
 ## Updates and migration
 
 This checkout contains 15 independently versioned mods. The two standalone MCM position patches have been replaced by **MCM UI Tweaks**. The full **Load Ready — R1nk1 / Crispy Clean Variant** is no longer included; **Load Ready Lite** provides the notification-only alternative. Disable older copies before enabling replacements. Historical versions remain in Git history and previous releases where available.

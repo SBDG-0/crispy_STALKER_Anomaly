@@ -23,10 +23,8 @@ Requires [AUGmented - The AUG Pack](https://www.moddb.com/mods/stalker-anomaly/a
 
 ## Credits and asset provenance
 
-- FIREBREATH1001 / Firebreath and Blackgrowl: original AUGmented pack; its upstream page additionally credits Mike J.
+- FIREBREATH1001 / Firebreath and Blackgrowl: [original AUGmented pack](https://www.moddb.com/mods/stalker-anomaly/addons/augmented-the-aug-pack)
 - Party_50: [Shader 3D Scopes](https://www.moddb.com/mods/stalker-anomaly/addons/shader-3d-scopes).
-- MsPizza727: [3DSS EFP Ported](https://www.moddb.com/addons/3dss-efp-ported), which includes an AUGmented conversion. This is a relevant upstream conversion, but the supplied files do not establish whether this patch's model or reticle was taken from it.
-- The exact editing/redistribution history of the bundled binary model and reticle is not recorded locally. These credits acknowledge the base projects without claiming verified authorship of each binary asset.
 
 ## Installation
 

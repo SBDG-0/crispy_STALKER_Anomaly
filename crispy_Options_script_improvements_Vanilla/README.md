@@ -10,6 +10,8 @@ Replaces Anomaly's vanilla options-menu script with adjusted slider limits and f
 
 <img src="https://github.com/user-attachments/assets/77e04ddd-3f28-43ff-afeb-c9d6262b78c0" alt="Options menu audio controls" width="900" />
 
+<img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
+
 ## Features
 
 - Carry-weight slider: **10–500 kg**, in **5 kg** steps.
@@ -28,6 +30,10 @@ This is a complete `gamedata/scripts/ui_options.script` replacement.
 Other mods supplying that script need a manual merge; changing priority alone chooses one version and loses the other version's changes. It is intended for vanilla options, not arbitrary modpack menu replacements.
 Configure through the normal game options menu; there is no separate MCM page.
 
+<img src="https://github.com/user-attachments/assets/41ec474c-ff25-47cb-9d16-f45108987a55" alt="Expanded gameplay options" width="900" />
+
+<img src="https://github.com/user-attachments/assets/5595a69d-644f-4b08-a739-898926c7f7e8" alt="Additional gameplay options" width="900" />
+
 ## Credits
 
 - Tronex: original Anomaly options-menu implementation.
@@ -37,10 +43,6 @@ Configure through the normal game options menu; there is no separate MCM page.
 ## Installation
 
 Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. To build an archive, ZIP the contents of this mod folder rather than the entire repository. Disable the mod in MO2 to remove its files.
-
-## More screenshots
-
-<img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
 
 ---
 

@@ -41,8 +41,6 @@ Previously labeled `1.01`; normalized to major.minor.patch.
 
 Fixed compatibility with Back and Forth Buttons for MCM.
 
----
-
 ## Reuse
 
 This software is provided “as is”, without warranty of any kind. You may use, modify, and distribute it, provided you credit SavageBulldogOG and include a link to this repository.

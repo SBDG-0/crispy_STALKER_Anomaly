@@ -10,6 +10,8 @@
 
 <img src="https://github.com/user-attachments/assets/3848a52b-f745-447b-8aae-19f334947130" alt="Back and Forth positioning controls from the standalone patch" width="900" />
 
+<img src="https://github.com/user-attachments/assets/d5e4ee85-4fc2-4d3d-86ec-c3945e3053f3" alt="Custom Mod Categories positioning controls from the standalone patch" width="900" />
+
 The screenshots show the original standalone patches. The combined addon groups their settings under **MCM UI Tweaks**.
 
 ## Features
@@ -52,20 +54,12 @@ Runtime components live in separate scripts. The shared `crispy_mcm_ui_position.
 
 To add a future tweak, create a component exposing `build_tab()`, give it a unique tab ID and localized control hints, and add it to the entry point's component registry. Keep installation idempotent. Component filenames should not end in `mcm.script`; they must not create a second standalone menu. Existing standalone setting IDs remain available for migration.
 
-## More screenshots
-
-<img src="https://github.com/user-attachments/assets/d5e4ee85-4fc2-4d3d-86ec-c3945e3053f3" alt="Custom Mod Categories positioning controls from the standalone patch" width="900" />
-
 ## Changelog
 
 ### 1.0.0
 
 - Combined both standalone position patches, based on their 1.3.0 implementations.
 - Added one parent menu, two tabs, saved-offset migration, shared positioning helpers, and a component registry for future additions.
-
-## Validation
-
-Automated checks cover Lua compilation, menu structure, settings migration, independent offsets, bounds, reset-to-zero behavior, and repeated menu construction. Actual mouse hitboxes, popup behavior, and appearance still require in-game testing with the installed addons.
 
 ---
 

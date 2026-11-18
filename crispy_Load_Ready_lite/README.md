@@ -18,7 +18,7 @@ No MCM page or state files. To customize, edit `SOUND` and `VOLUME` at the top o
 
 ## Requirements and compatibility
 
-Requires Anomaly and [Modded Exes](https://github.com/themrdemonized/xray-monolith) exposing `OnLoadingScreenKeyPrompt` and its script callback. Without that bridge the script logs a message and disables itself. Use this as an alternative to the full Load Ready version; enabling both can produce duplicate notifications. It does not change automatic-entry settings.
+- [Modded Exes](https://github.com/themrdemonized/xray-monolith)
 
 ## Credits and provenance
 

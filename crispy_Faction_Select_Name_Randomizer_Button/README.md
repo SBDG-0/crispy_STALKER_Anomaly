@@ -18,12 +18,13 @@ Adds a separate random-name button beside the character name field on the new-ga
 
 ## Requirements and compatibility
 
-Requires Anomaly and [Modded Exes](https://github.com/themrdemonized/xray-monolith) with the `on_xml_read`/ModXML API. No MCM settings. The menu must retain Anomaly's `UINewGame` class, name field and random-button layout elements; heavily replaced new-game menus may need adaptation. No original XML file is replaced.
+- [Modded Exes](https://github.com/themrdemonized/xray-monolith)
+
+No original XML file is replaced.
 
 ## Credits
 
-- SavageBulldog / SavageBulldogOG: button and integration script.
-- Anomaly developers: original faction-selection menu, random-name logic, translations and name pools. The script explicitly follows the name step of `UINewGame:OnRandomize`.
+- Anomaly developers: original faction-selection menu, random-name logic, translations and name pools. <br>The script explicitly follows the name step of `UINewGame:OnRandomize`.
 - Modded Exes contributors: runtime XML editing and callbacks.
 
 ## Installation

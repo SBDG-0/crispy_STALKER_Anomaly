@@ -18,13 +18,12 @@ After the original `UINewGame:UpdateDescr` runs, replaces UTF-8 replacement-char
 
 ## Requirements and compatibility
 
-Requires Anomaly and [Modded Exes](https://github.com/themrdemonized/xray-monolith) supporting the ModXML script entry point and `main_menu_on_init` callback. No settings or MCM dependency. The runtime hook specifically fixes faction-relations text. The bundled English string tables replace files with the same names; merge them if another addon changes those files. This does not repair every possible NiS/encoding issue elsewhere in the game. A replacement faction menu must retain `UINewGame`, `UpdateDescr` and `text_relations`.
+- [Modded Exes](https://github.com/themrdemonized/xray-monolith) supporting the ModXML script entry point and `main_menu_on_init` callback. No settings or MCM dependency. The runtime hook specifically fixes faction-relations text. The bundled English string tables replace files with the same names; merge them if another addon changes those files. This does not repair every possible NiS/encoding issue elsewhere in the game. A replacement faction menu must retain `UINewGame`, `UpdateDescr` and `text_relations`.
 
 ## Credits
 
 - Anomaly developers: original menu, relationship descriptions and font system.
 - Modded Exes contributors: script loading and menu callback support.
-- No separately named third-party base addon is identified in the supplied script.
 
 ## Installation
 

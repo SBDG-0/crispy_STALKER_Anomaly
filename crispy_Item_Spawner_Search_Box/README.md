@@ -6,6 +6,10 @@
 
 **Item Spawner Search Box** adds a search field and result counter to the debug item spawner in *S.T.A.L.K.E.R. Anomaly 1.5.3*. Find items by their display name or section ID across all spawner categories, including modded items supported by the installed spawner.
 
+## Preview
+
+<img width="900" alt="crispy_Item_Spawner_Search_Box" src="https://github.com/user-attachments/assets/3a393a7c-b049-47dc-97b1-5ac2e7627f2d" />
+
 ## Features
 
 - Search every category without opening each one individually.
@@ -82,7 +86,7 @@ Mods replacing the same spawner methods after startup may conflict. Existing spa
 
 ## Validation
 
-LuaJIT checks cover script syntax and mocked search behavior. Layout checks confirm that all three top-row columns match the installed Sota/MAS ultrawide panel boundaries without overlap. Actual rendering, keyboard focus, and multiplayer behavior still require in-game testing. Check an ordinary item, a modded section ID, a nonexistent query, category restoration after clearing, and spawning to each destination.
+LuaJIT checks cover script syntax and mocked search behavior.
 
 ---
 
