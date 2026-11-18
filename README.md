@@ -46,6 +46,8 @@ Adds a separate random-name button beside the character name field on the new-ga
 
 Search the debug item spawner by display name or section ID across all categories, with synchronized list/grid results.
 
+<img width="900" alt="crispy_Item_Spawner_Search_Box" src="https://github.com/user-attachments/assets/3a393a7c-b049-47dc-97b1-5ac2e7627f2d" />
+
 ### [Custom Loading Screen Background for Multiplayer](crispy_Custom_Loading_Screen_BG_For_MP/README.md)
 
 **Version:** `1.0.0`
@@ -71,6 +73,14 @@ Toggles repeated mask wiping at a configurable interval using Anomaly's existing
 Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model, reticle texture and DLTX configuration overrides.
 
 <img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" />
+
+### [Load Ready Lite](crispy_Load_Ready_lite/README.md)
+
+**Version:** `1.0.0`
+
+Plays one notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
+
+https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1
 
 ### [MCM Remembers Last Tab + Custom Mod Categories Compatibility Patch](crispy_MCM_Remembers_Last_Tab_CMC_Patch/README.md)
 
@@ -121,14 +131,6 @@ Adjusts the layout on the draggable HUD editor for ultrawide displays.
 Repairs malformed faction-relations bullets at runtime and includes replacement English ammo, glowstick, and medical item string tables. These full string-table files can conflict with other localization mods.
 
 <img src="https://github.com/user-attachments/assets/b93af64d-8685-4f5d-9516-2cf765f14060" alt="NiS Bullet Fix" width="900" />
-
-### [Load Ready Lite](crispy_Load_Ready_lite/README.md)
-
-**Version:** `1.0.0`
-
-Plays one notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
-
-https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1
 
 ### [Vanilla Options Script Improvements](crispy_Options_script_improvements_Vanilla/README.md)
 
