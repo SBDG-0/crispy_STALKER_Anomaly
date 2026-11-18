@@ -142,10 +142,6 @@ Replaces Anomaly's vanilla options-menu script with adjusted slider limits and f
 
 <img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
 
-## Updates and migration
-
-This checkout contains 15 independently versioned mods. The two standalone MCM position patches have been replaced by **MCM UI Tweaks**. The full **Load Ready — R1nk1 / Crispy Clean Variant** is no longer included; **Load Ready Lite** provides the notification-only alternative. Disable older copies before enabling replacements. Historical versions remain in Git history and previous releases where available.
-
 ## Building release ZIPs
 
 From the repository root, using Python 3.13 (the workflow version):
@@ -160,8 +156,7 @@ The builder validates each mod's metadata and README version, creates one ZIP pe
 The single release workflow publishes packages when a `v*` tag is pushed. A manual workflow run builds downloadable artifacts without publishing a release. Repository release tags identify the collection; individual mod versions remain those recorded in their README and `meta.ini`.
 
 ## Third-party content
-
-Keep each mod's upstream credits and restrictions. Some bundled assets have incomplete provenance recorded in their individual READMEs. The reuse statement below applies to the author's contributions and does not override third-party terms.
+The reuse statement below applies to the author's contributions and does not override third-party terms.
 
 ---
 
