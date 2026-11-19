@@ -4,7 +4,7 @@
 
 ## Description
 
-**Lowered Weapon Sprint Extended** combines automatic sprint lowering, adjustable weapon poses, and the wheel and keyboard controls from **Lowered Weapon Key Extended** for *S.T.A.L.K.E.R. Anomaly*.
+**Lowered Weapon Sprint Extended** combines automatic sprint lowering, adjustable weapon poses, and mouse wheel and keyboard controls for *S.T.A.L.K.E.R. Anomaly*.
 
 Lower your weapon while sprinting, adjust its position, or control raised/lowered stance and holstering yourself. Both mods are included in one installation.
 
@@ -27,7 +27,10 @@ Lower your weapon while sprinting, adjust its position, or control raised/lowere
 ## Installation
 
 1. Install this folder as a mod in Mod Organizer 2, with `gamedata` at the mod's root.
-2. Disable the separate **Lowered Weapon Key Extended / Scroll Stance**, previous **Lowered Weapon Sprint Extended / Sprint Weapon Suite**, **Lower Weapon Sprint Optimized**, and the earlier separate **Lowered Weapon Position** mod, if installed.
+2. Disable the following mods if installed: 
+- **Lowered Weapon Key Extended / Scroll Stance**
+- **Lowered Weapon Sprint Extended / Sprint Weapon Suite**
+- **Lower Weapon Sprint Optimized**
 3. Enable this combined mod and restart the game.
 4. Open MCM → **Lowered Weapon Sprint Extended**, then choose **Sprint and Position** or **Keys and Wheel**.
 
@@ -77,16 +80,11 @@ This addon supplies scripts and English localization; it does not replace weapon
 
 Aiming, firing, reloads, crouching/sliding, and active Cover Tilt take priority over visual profiles. The HUD adjustment wrapper observes other addons' writes, but addons that cache engine functions before it loads or adjust HUD data natively may bypass that cooperation. Weapon animation rotations can affect the apparent direction of offsets; tune profiles in-game.
 
-## Validation
-
-LuaJIT checks cover script syntax, manual stance ownership during sprinting, wheel/key integration, and reset behavior. XML files are checked for valid structure and duplicate string IDs.
-
 ## Credits
 
 - **Skieppy** — original Lower Weapon Sprint addon.
 - **Spaicrab and Coverdrave** — Lower Weapon Sprint edits.
 - **henryd** — original [Scroll Stance](https://www.moddb.com/mods/stalker-anomaly/addons/scroll-stance).
-- **crispy** — extended versions and combined integration.
 
 ---
 
