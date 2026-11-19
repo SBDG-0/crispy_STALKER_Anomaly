@@ -68,7 +68,7 @@ For a distributable archive, use the repository packaging workflow. The ZIP root
 - Preserved the name field, description area, faction-specific name generation and callback behavior.
 - Widened the compact button and tightened the money-row spacing to address SOTA 16:9 label overflow.
 - Kept positioning automatic; no MCM settings were added.
-- Confirmed the current layout and sizing working in-game with vanilla and SOTA UI (user testing, 19 November 2026).
+- Confirmed the current layout and sizing working in-game with vanilla and SOTA UI.
 
 ---
 
