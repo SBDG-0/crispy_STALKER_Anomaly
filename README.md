@@ -142,21 +142,6 @@ Replaces Anomaly's vanilla options-menu script with adjusted slider limits and f
 
 <img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
 
-## Package versions and local builds
-
-Each mod is versioned independently using four numeric parts: `MAJOR.MINOR.PATCH.REVISION`. The version in its README, this catalogue and its `meta.ini` must match. Existing three-part labels have been normalized by appending `.0`; this formatting change does not constitute a new mod release. Collection release tags and upstream dependency/component versions are separate and retain their historical labels.
-
-From the repository root, run:
-
-```powershell
-python .github/scripts/test_package_mods.py
-python .github/scripts/package_mods.py
-```
-
-The packager validates all mods before building individual ZIPs in `.releases/`, then checks their file lists and CRC integrity. Each archive contains only `meta.ini` and `gamedata/` at its root; README files are excluded at every depth. Requirements, conflict priority, credits and limitations remain in each mod’s README.
-
-The existing workflow builds downloadable archives when run manually and publishes releases on pushed `v*` tags. Local checks verify packaging and documentation consistency; they do not establish in-game compatibility for every mod. Individual READMEs record known limitations and available validation evidence.
-
 ## Third-party content
 The reuse statement below applies to the author's contributions and does not override third-party terms.
 
