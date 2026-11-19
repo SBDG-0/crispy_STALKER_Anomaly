@@ -84,10 +84,6 @@ Mods replacing the same spawner methods after startup may conflict. Existing spa
 
 - Added search across categories, synchronized list/grid filtering, result counts, and Home shortcut protection.
 
-## Validation
-
-LuaJIT checks cover script syntax and mocked search behavior.
-
 ---
 
 [Back to main page](../README.md)
