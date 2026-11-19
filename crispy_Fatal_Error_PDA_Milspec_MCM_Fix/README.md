@@ -1,6 +1,6 @@
 # Fatal Error + Milspec PDA MCM Text String Patch
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 ## Description
 
@@ -19,7 +19,7 @@ Fixes missing MCM text and improves wording for Fatal Error and Milspec PDA.
 
 Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly/releases) as a separate mod in MO2.
 
-Enable it in Mod Organizer 2.
+Enable it after the required addons and let it win conflicts for `gamedata/configs/text/eng/st_fe_mcm.xml`. This is a complete replacement English string table; merge it manually with other changes to that file. This package does not include a Russian translation or any gameplay scripts.
 
 ---
 

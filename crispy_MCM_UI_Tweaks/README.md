@@ -1,6 +1,6 @@
 # MCM UI Tweaks
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 ## Description
 
@@ -56,9 +56,9 @@ To add a future tweak, create a component exposing `build_tab()`, give it a uniq
 
 ## Changelog
 
-### 1.0.0
+### 1.0.0.0
 
-- Combined both standalone position patches, based on their 1.3.0 implementations.
+- Combined both standalone position patches, based on their 1.3.0 implementations (upstream/standalone provenance).
 - Added one parent menu, two tabs, saved-offset migration, shared positioning helpers, and a component registry for future additions.
 
 ---

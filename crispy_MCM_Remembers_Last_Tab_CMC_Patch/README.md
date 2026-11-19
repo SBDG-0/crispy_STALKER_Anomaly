@@ -1,6 +1,6 @@
 # MCM Remembers Last Tab + Custom Mod Categories Compatibility Patch
 
-**Version:** `1.1.0`
+**Version:** `1.1.0.0`
 
 ## Description
 
@@ -35,11 +35,13 @@ Enable this patch below both original mods in Mod Organizer 2 so its scripts ove
 
 ## Changelog
 
-### 1.1.0
+### 1.1.0.0
 
-Previously labeled `1.01`; normalized to major.minor.patch.
+Previously labeled `1.01`; recorded as `1.1.0.0` under the repository’s four-part package version format. Internal component labels such as `1.8-cmc` and `1.1-cmc` identify the bundled scripts, not the package version.
 
 Fixed compatibility with Back and Forth Buttons for MCM.
+
+---
 
 ## Reuse
 

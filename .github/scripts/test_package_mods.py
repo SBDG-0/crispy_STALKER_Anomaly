@@ -18,8 +18,8 @@ class PackagingTests(unittest.TestCase):
         (self.mod / 'gamedata' / 'scripts').mkdir(parents=True)
         (self.mod / 'gamedata' / 'scripts' / 'test.script').write_text('payload')
         self.meta = self.mod / 'meta.ini'
-        self.meta.write_text('[General]\nurl=' + packager.REPOSITORY_URL + '\nhasCustomURL=true\ninstallationFile=crispy_test.zip\nversion=1.0.0\n')
-        (self.mod / 'README.md').write_text('# Test\n\n**Version:** `1.0.0`\n')
+        self.meta.write_text('[General]\nurl=' + packager.REPOSITORY_URL + '\nhasCustomURL=true\ninstallationFile=crispy_test.zip\nversion=1.0.0.0\n')
+        (self.mod / 'README.md').write_text('# Test\n\n**Version:** `1.0.0.0`\n')
 
     def test_only_installable_payload(self):
         for path in [self.mod / 'extra.txt', self.mod / 'gamedata' / 'scripts' / 'ReadMe.MD']:
@@ -40,14 +40,19 @@ class PackagingTests(unittest.TestCase):
 
     def test_nonstandard_versions_rejected(self):
         original = self.meta.read_text()
-        for version in ['', '1.3', 'v1.0.0', '1.01.0', '1.4.0-clean', 'd2026.11.11.0']:
+        for version in ['', '1.3', '1.0.0', 'v1.0.0.0', '1.01.0.0', '1.0.0.01', '1.0.0.0.0', '1.4.0-clean', 'd2026.11.11.0']:
             with self.subTest(version=version):
-                self.meta.write_text(original.replace('version=1.0.0', f'version={version}'))
+                self.meta.write_text(original.replace('version=1.0.0.0', f'version={version}'))
                 with self.assertRaises(ValueError):
                     packager.validate(self.mod)
 
+    def test_nonzero_revision_accepted(self):
+        self.meta.write_text(self.meta.read_text().replace('version=1.0.0.0', 'version=1.0.0.7'))
+        (self.mod / 'README.md').write_text('# Test\n\n**Version:** `1.0.0.7`\n')
+        self.assertTrue(packager.validate(self.mod))
+
     def test_readme_version_mismatch_rejected(self):
-        (self.mod / 'README.md').write_text('# Test\n\n**Version:** `2.0.0`\n')
+        (self.mod / 'README.md').write_text('# Test\n\n**Version:** `2.0.0.0`\n')
         with self.assertRaises(ValueError):
             packager.validate(self.mod)
 

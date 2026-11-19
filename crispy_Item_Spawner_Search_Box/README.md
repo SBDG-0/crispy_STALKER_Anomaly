@@ -1,6 +1,6 @@
 # Item Spawner Search Box
 
-**Version:** `1.0.2`
+**Version:** `1.0.2.0`
 
 ## Description
 
@@ -70,17 +70,17 @@ Mods replacing the same spawner methods after startup may conflict. Existing spa
 
 ## Changelog
 
-### 1.0.2
+### 1.0.2.0
 
 - Aligned the search row with the three spawner columns and removed overlapping control bounds.
 - Added subtle translucent backgrounds behind the search label and result counter.
 - Kept the changing counter as `CUITextWnd`, with a separate background static.
 
-### 1.0.1
+### 1.0.1.0
 
 - Fixed the menu-opening crash from 1.0 by creating the result counter as `CUITextWnd` with `InitTextWnd`, which supports `SetText`.
 
-### 1.0.0
+### 1.0.0.0
 
 - Added search across categories, synchronized list/grid filtering, result counts, and Home shortcut protection.
 

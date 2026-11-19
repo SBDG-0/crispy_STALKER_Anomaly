@@ -19,8 +19,8 @@ def validate(mod):
         if general.get(key) != value:
             raise ValueError(f"{mod.name}: {key} must be {value!r}")
     version = general.get("version", "")
-    if not re.fullmatch(r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", version):
-        raise ValueError(f"{mod.name}: version must use MAJOR.MINOR.PATCH")
+    if not re.fullmatch(r"(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)\.(?:0|[1-9][0-9]*)", version):
+        raise ValueError(f"{mod.name}: version must use MAJOR.MINOR.PATCH.REVISION")
     readme = (mod / "README.md").read_text(encoding="utf-8-sig")
     if re.findall(r"(?m)^\*\*Version:\*\* `([^`]+)`\s*$", readme) != [version]:
         raise ValueError(f"{mod.name}: README version must match meta.ini ({version})")

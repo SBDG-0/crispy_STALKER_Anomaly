@@ -1,6 +1,6 @@
 # Sota UI Rework MAS DevKit Ultrawide Patch
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 ## Description
 
@@ -19,7 +19,7 @@ Adjusts the draggable HUD editor layout for Sota UI Rework and the MAS DevKit on
 
 Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly/releases) as a separate mod in MO2.
 
-Enable it in Mod Organizer 2.
+Enable it after Sota UI Rework and the MAS DevKit, and let this patch win conflicts for `gamedata/configs/ui/ui_debug_launcher_16.xml`. It supplies a complete replacement of that widescreen debug-launcher layout, not just an isolated editor fragment. Other mods replacing the same XML need a manual merge to retain both sets of changes. No script or MCM settings are included.
 
 ---
 

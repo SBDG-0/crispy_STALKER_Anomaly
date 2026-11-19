@@ -22,27 +22,27 @@ More detailed instructions and information can be found in each mod’s README i
 
 ### [Stealth + Ghillie Rework Compatibility Patch](crispy_Stealth_2.31_Ghillie_Rework_1.2_Compatibility_Patch/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Compatibility patch for Stealth v2.31 and Ghillie Rework v1.2.
 
 ### [Lowered Weapon Sprint Extended](crispy_Lowered_Weapon_Sprint_extended/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Combines automatic sprint lowering, adjustable weapon poses, and configurable wheel/key stance and holster controls in one addon with two MCM settings tabs.
 
 ### [Faction Select Name Randomizer Button](crispy_Faction_Select_Name_Randomizer_Button/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
-Adds a separate random-name button beside the character name field on the new-game faction selection screen. It changes only the name, keeping the selected faction and other starting choices.
+Adds a separate random-name button on the money row below the character name field. 
 
 <img src="https://github.com/user-attachments/assets/9870052f-6fa9-4e51-a6d3-059819375ab1" alt="Faction selection with the separate random-name button" width="900" />
 
 ### [Item Spawner Search Box](crispy_Item_Spawner_Search_Box/README.md)
 
-**Version:** `1.0.2`
+**Version:** `1.0.2.0`
 
 Search the debug item spawner by display name or section ID across all categories, with synchronized list/grid results.
 
@@ -50,7 +50,7 @@ Search the debug item spawner by display name or section ID across all categorie
 
 ### [Custom Loading Screen Background for Multiplayer](crispy_Custom_Loading_Screen_BG_For_MP/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Replaces the loading-screen background with artwork selected for multiplayer.
 
@@ -58,7 +58,7 @@ Replaces the loading-screen background with artwork selected for multiplayer.
 
 ### [Auto Wipe Mask in Intervals](crispy_Auto_Wipe_Mask_in_Intervals/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Toggles repeated mask wiping at a configurable interval using Anomaly's existing mask-cleaning function.
 
@@ -68,7 +68,7 @@ Toggles repeated mask wiping at a configurable interval using Anomaly's existing
 
 ### [AUGmented AUG A1 3DSS Patch](crispy_AUGmented_Aug_A1_3DSS/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model, reticle texture and DLTX configuration overrides.
 
@@ -76,7 +76,7 @@ Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model
 
 ### [Load Ready Lite](crispy_Load_Ready_lite/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Plays one notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
 
@@ -84,13 +84,13 @@ https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1
 
 ### [MCM Remembers Last Tab + Custom Mod Categories Compatibility Patch](crispy_MCM_Remembers_Last_Tab_CMC_Patch/README.md)
 
-**Version:** `1.1.0`
+**Version:** `1.1.0.0`
 
 Custom Mod Categories v1.1.1 compatibility for MCM Remembers Last Tab v1.2.
 
 ### [MCM UI Tweaks](crispy_MCM_UI_Tweaks/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Combines Back and Forth button positioning and Custom Mod Categories dropdown positioning in one MCM menu with two tabs. Disable both former standalone position patches when enabling this combined addon.
 
@@ -102,7 +102,7 @@ The screenshots below show the original standalone controls, now grouped under M
 
 ### [Fatal Error + Milspec PDA MCM Text String Patch](crispy_Fatal_Error_PDA_Milspec_MCM_Fix/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Fixes missing MCM text and improves wording for Fatal Error and Milspec PDA.
 
@@ -110,7 +110,7 @@ Fixes missing MCM text and improves wording for Fatal Error and Milspec PDA.
 
 ### [Pizza's Ultimate Sight Selection for Anomaly Magnifier MCM Text Patch](crispy_PUSSy_Magnifier_MCM_Text_Patch/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Adds missing English and Russian MCM strings for the magnifier script.
 
@@ -118,7 +118,7 @@ Adds missing English and Russian MCM strings for the magnifier script.
 
 ### [Sota UI Rework MAS DevKit Ultrawide Patch](crispy_Sota_UI_Rework_MAS_DevKit_Ultrawide_Patch/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Adjusts the layout on the draggable HUD editor for ultrawide displays.
 
@@ -126,7 +126,7 @@ Adjusts the layout on the draggable HUD editor for ultrawide displays.
 
 ### [NiS XML and Faction Relations Fix](crispy_NiS_xml_fix/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Repairs malformed faction-relations bullets at runtime and includes replacement English ammo, glowstick, and medical item string tables. These full string-table files can conflict with other localization mods.
 
@@ -134,13 +134,28 @@ Repairs malformed faction-relations bullets at runtime and includes replacement 
 
 ### [Vanilla Options Script Improvements](crispy_Options_script_improvements_Vanilla/README.md)
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 Replaces Anomaly's vanilla options-menu script with adjusted slider limits and finer control, plus a runtime label change identifying the expanded carry-weight slider.
 
 <img src="https://github.com/user-attachments/assets/77e04ddd-3f28-43ff-afeb-c9d6262b78c0" alt="Options menu audio controls" width="900" />
 
 <img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
+
+## Package versions and local builds
+
+Each mod is versioned independently using four numeric parts: `MAJOR.MINOR.PATCH.REVISION`. The version in its README, this catalogue and its `meta.ini` must match. Existing three-part labels have been normalized by appending `.0`; this formatting change does not constitute a new mod release. Collection release tags and upstream dependency/component versions are separate and retain their historical labels.
+
+From the repository root, run:
+
+```powershell
+python .github/scripts/test_package_mods.py
+python .github/scripts/package_mods.py
+```
+
+The packager validates all mods before building individual ZIPs in `.releases/`, then checks their file lists and CRC integrity. Each archive contains only `meta.ini` and `gamedata/` at its root; README files are excluded at every depth. Requirements, conflict priority, credits and limitations remain in each mod’s README.
+
+The existing workflow builds downloadable archives when run manually and publishes releases on pushed `v*` tags. Local checks verify packaging and documentation consistency; they do not establish in-game compatibility for every mod. Individual READMEs record known limitations and available validation evidence.
 
 ## Third-party content
 The reuse statement below applies to the author's contributions and does not override third-party terms.

@@ -1,6 +1,6 @@
 # Pizza's Ultimate Sight Selection for Anomaly Magnifier MCM Text Patch
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 ## Description
 
@@ -20,7 +20,7 @@ Install the ZIP from [releases](https://github.com/SBDG-0/crispy_stalker_anomaly
 
 Enable this mod alongside Pizza's Ultimate Sight Selection for Anomaly in Mod Organizer 2.
 
-No original mod files are changed by this patch.
+Supplies `ui_st_magnifier_switch.xml` under both `gamedata/configs/text/eng/` and `gamedata/configs/text/rus/`. Let this patch win conflicts for those string tables; merge them manually if another addon changes the same files. It supplies no replacement scripts.
 
 ---
 

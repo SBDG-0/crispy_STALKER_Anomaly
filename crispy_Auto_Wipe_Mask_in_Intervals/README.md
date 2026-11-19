@@ -1,6 +1,6 @@
 # Auto Wipe Mask in Intervals
 
-**Version:** `1.0.0`
+**Version:** `1.0.0.0`
 
 ## Description
 
@@ -33,7 +33,7 @@ Open MCM's Mask Wiping page. Press **H** in game to toggle automatic wiping by d
 
 ## Installation
 
-Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. To build an archive, ZIP the contents of this mod folder rather than the entire repository. Disable the mod in MO2 to remove its files.
+Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. To build an archive, use the repository packaging workflow. ZIP roots contain only `meta.ini` and `gamedata/`; README files are excluded at every depth. Disable the mod in MO2 to remove its files.
 
 ---
 

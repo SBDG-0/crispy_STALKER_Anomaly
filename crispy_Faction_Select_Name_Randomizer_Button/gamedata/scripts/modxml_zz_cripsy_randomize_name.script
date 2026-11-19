@@ -13,32 +13,46 @@ local function add_name_button(file_name, xml)
 
     local dialog = xml:query("main_dialog")[1]
     local input = xml:query("main_dialog > input_name")[1]
+    local caption = xml:query("main_dialog > cap_name")[1]
+    local money_caption = xml:query("main_dialog > cap_money")[1]
+    local money = xml:query("main_dialog > text_money")[1]
     local random = xml:query("main_dialog > btn_random")[1]
-    if not (dialog and input and random) then return end
+    local compact = xml:query("main_dialog > btn_faction")[1]
+    if not (dialog and input and caption and money_caption and money and random and compact) then return end
     if xml:query("main_dialog > " .. BUTTON)[1] then return end
 
     local field = xml:getElementAttr(input)
+    local label = xml:getElementAttr(caption)
+    local amount = xml:getElementAttr(money)
     local style = xml:getElementAttr(random)
-    local x, y = tonumber(field.x), tonumber(field.y)
-    local width, height = tonumber(field.width), tonumber(field.height)
-    local random_width, button_height = tonumber(style.width), tonumber(style.height)
-    if not (x and y and width and height and random_width and button_height) then return end
+    local small = xml:getElementAttr(compact)
+    local x, width = tonumber(field.x), tonumber(field.width)
+    local label_x, label_width = tonumber(label.x), tonumber(label.width)
+    local y, height = tonumber(amount.y), tonumber(amount.height)
+    local random_width, button_height = tonumber(style.width), tonumber(small.height)
+    if not (x and width and label_x and label_width and y and height and random_width and button_height) then return end
 
+    -- Align the money label/value with the name row and use the reclaimed space.
+    -- The name field and the description viewport keep their original dimensions.
+    -- A wider label box also accommodates SOTA; reclaim the small money inset/gap.
+    local gap = random_width * 0.02
     local button_width = random_width * 0.8
-    local gap = random_width * 0.06
-    local field_width = width - button_width - gap
-    if field_width <= 0 then return end
+    local button_x = x + width - button_width
+    local money_x = label_x + label_width + 3
+    local money_width = button_x - gap - money_x
+    if button_width <= 0 or button_height <= 0 or money_width <= 0 then return end
 
     local button_xml = ([=[
         <%s x="%g" y="%g" width="%g" height="%g" stretch="1">
-            <text y="1" r="150" g="150" b="150" align="c" vert_align="c" font="letterica18">st_mm_btn_new_game_rand</text>
+            <text r="150" g="150" b="150" align="c" vert_align="c" font="letterica16">st_mm_btn_new_game_rand</text>
             <texture>ui_inGame2_button</texture>
         </%s>
-    ]=]):format(BUTTON, x + field_width + gap, y + (height - button_height) / 2,
+    ]=]):format(BUTTON, button_x, y + (height - button_height) / 2,
         button_width, button_height, BUTTON)
 
     if xml:insertFromXMLString(button_xml, dialog) then
-        xml:setElementAttr(input, {width = field_width})
+        xml:setElementAttr(money_caption, {x = label_x, width = label_width})
+        xml:setElementAttr(money, {x = money_x, width = money_width})
     end
 end
 
