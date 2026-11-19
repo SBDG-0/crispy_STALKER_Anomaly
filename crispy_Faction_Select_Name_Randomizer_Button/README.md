@@ -10,7 +10,6 @@ Adds a separate random-name button on the money row below the character name fie
 ## Preview
 
 <img width="900" alt="_crispy_randomize_names_van" src="https://github.com/user-attachments/assets/ac5bf503-09d0-4eb6-8cc3-5e67045e5673" />
-<img width="900" alt="_crispy_randomize_names" src="https://github.com/user-attachments/assets/9ff5df37-1107-4332-96dd-8fc8e7f4f8e3" />
 
 ## Features
 
@@ -39,6 +38,8 @@ The button sits to the right of the money amount, below the name. Its right edge
 - Texture: vanilla `ui_inGame2_button`, stretched to the button dimensions.
 
 The name field and description viewport keep their original dimensions. The script skips insertion if required controls or numeric attributes are missing, the button already exists, or the calculated money/button dimensions are not positive.
+
+<img width="900" alt="_crispy_randomize_names" src="https://github.com/user-attachments/assets/9ff5df37-1107-4332-96dd-8fc8e7f4f8e3" />
 
 ### Compatibility and validation
 
