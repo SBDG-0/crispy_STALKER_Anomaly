@@ -5,6 +5,7 @@
 !/README.md
 !/crispy_*/
 !/.github/
+!/.changelogs/
 
 # Generated files, local configuration and credentials at any depth.
 __pycache__/

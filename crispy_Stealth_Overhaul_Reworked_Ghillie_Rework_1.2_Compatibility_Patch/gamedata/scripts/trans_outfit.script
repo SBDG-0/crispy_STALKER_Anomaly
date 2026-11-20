@@ -1,0 +1,4 @@
+-- Disable Ghillie Rework's competing global NPC range/FOV changes.
+-- bind_stalker still calls this legacy entry point; Reworked owns detection.
+function timer_trans()
+end

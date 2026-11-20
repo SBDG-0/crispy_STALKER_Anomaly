@@ -18,6 +18,12 @@ More detailed instructions and information can be found in each mod’s README i
 
 ## Mods
 
+### [Stealth Overhaul Reworked + Ghillie Rework Compatibility Patch](crispy_Stealth_Overhaul_Reworked_Ghillie_Rework_1.2_Compatibility_Patch/README.md)
+
+**Version:** `1.0.0.0`
+
+Lets you use Ghillie Rework 1.2 with Stealth Overhaul Reworked, including camouflage while moving.
+
 ### [Stealth + Ghillie Rework Compatibility Patch](crispy_Stealth_2.31_Ghillie_Rework_1.2_Compatibility_Patch/README.md)
 
 **Version:** `1.0.0.0`

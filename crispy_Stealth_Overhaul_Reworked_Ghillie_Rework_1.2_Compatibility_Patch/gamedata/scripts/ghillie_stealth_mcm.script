@@ -1,0 +1,18 @@
+local defaults = {visibility = 100, firing_alert = 60}
+
+function get_config(key)
+    if ui_mcm then
+        local value = ui_mcm.get("poof/" .. key)
+        if value ~= nil then return value end
+    end
+    return defaults[key]
+end
+
+function on_mcm_load()
+    return {id = "poof", sh = true, gr = {
+        {id = "title", type = "slide", link = "ui_options_slider_player",
+            text = "ui_mcm_poof_title", size = {512, 50}, spacing = 20},
+        {id = "visibility", type = "track", val = 2, min = 10, max = 250, step = 0.5, def = 100},
+        {id = "firing_alert", type = "track", val = 2, min = 10, max = 150, step = 0.5, def = 60},
+    }}
+end
