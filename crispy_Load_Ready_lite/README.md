@@ -23,13 +23,10 @@ No MCM page or state files. To customize, edit `SOUND` and `VOLUME` at the top o
 ## Credits and provenance
 
 - R1nk1: original [Load Ready Sound / by R1nk1](https://www.moddb.com/addons/load-ready-sound-by-r1nk1)
-- Modded Exes contributors: loading-screen callback bridge.
-- Anomaly developers / GSC Game World: game and audio systems.
-- The bundled `ready.ogg` has no accompanying source/author record in this folder; its individual origin could not be verified. Do not assume repository authorship or blanket reuse rights for that audio.
 
 ## Installation
 
-Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. To build an archive, use the repository packaging workflow. ZIP roots contain only `meta.ini` and `gamedata/`; README files are excluded at every depth. Disable the mod in MO2 to remove its files.
+Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. Disable the mod in MO2 to remove its files.
 
 ---
 

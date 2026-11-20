@@ -18,16 +18,15 @@ After the original `UINewGame:UpdateDescr` runs, replaces UTF-8 replacement-char
 
 ## Requirements and compatibility
 
-- [Modded Exes](https://github.com/themrdemonized/xray-monolith) supporting the ModXML script entry point and `main_menu_on_init` callback. No settings or MCM dependency. The runtime hook specifically fixes faction-relations text. The bundled English string tables replace files with the same names; merge them if another addon changes those files. This does not repair every possible NiS/encoding issue elsewhere in the game. A replacement faction menu must retain `UINewGame`, `UpdateDescr` and `text_relations`.
+- [Modded Exes](https://github.com/themrdemonized/xray-monolith)
 
-## Credits
+No settings or MCM dependency. <br> The runtime hook specifically fixes faction-relations text. <br> The bundled English string tables replace files with the same names; merge them if another addon changes those files. This does not repair every possible NiS/encoding issue elsewhere in the game.
 
-- Anomaly developers: original menu, relationship descriptions and font system.
-- Modded Exes contributors: script loading and menu callback support.
+`zzz_st_items_medical.xml` is designed around BHSRO, remove it if you dont use BHSRO.
 
 ## Installation
 
-Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. To build an archive, use the repository packaging workflow. ZIP roots contain only `meta.ini` and `gamedata/`; README files are excluded at every depth. Disable the mod in MO2 to remove its files.
+Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements.
 
 ---
 

@@ -6,8 +6,6 @@ Fixes, patches, and small mods for [S.T.A.L.K.E.R. Anomaly](https://www.moddb.co
 
 Use [STALKER-Anomaly-modded-exes](https://github.com/themrdemonized/xray-monolith#stalker-anomaly-modded-exes) for best overall compatibility.
 
-## Preview
-
 <img src="https://github.com/user-attachments/assets/5b517125-dc69-40f5-8655-714b6b321ba7" alt="S.T.A.L.K.E.R. Anomaly mod preview" width="900" />
 
 ## Installation
@@ -16,7 +14,7 @@ Use [STALKER-Anomaly-modded-exes](https://github.com/themrdemonized/xray-monolit
 2. Install it as a separate mod in Mod Organizer 2 (MO2).
 3. Enable it and follow the requirements and conflict-priority instructions in its README.
 
-More detailed instructions and information can be found in each mod’s README in this repository. Download ZIPs contain only `gamedata/` and `meta.ini`; README files are excluded.
+More detailed instructions and information can be found in each mod’s README in this repository. <br> Download ZIPs contain only `gamedata/` and `meta.ini`; README files are excluded.
 
 ## Mods
 
@@ -30,15 +28,15 @@ Compatibility patch for Stealth v2.31 and Ghillie Rework v1.2.
 
 **Version:** `1.0.0.0`
 
-Combines automatic sprint lowering, adjustable weapon poses, and configurable wheel/key stance and holster controls in one addon with two MCM settings tabs.
+Combines automatic sprint lowering, adjustable weapon poses, and configurable wheel/key stance and holster controls.
 
 ### [Faction Select Name Randomizer Button](crispy_Faction_Select_Name_Randomizer_Button/README.md)
 
 **Version:** `1.0.0.0`
 
-Adds a separate random-name button on the money row below the character name field. 
+Adds a separate random-name button below the character name field.
 
-<img src="https://github.com/user-attachments/assets/9870052f-6fa9-4e51-a6d3-059819375ab1" alt="Faction selection with the separate random-name button" width="900" />
+<img width="900" alt="_crispy_randomize_names_van" src="https://github.com/user-attachments/assets/ac5bf503-09d0-4eb6-8cc3-5e67045e5673" />
 
 ### [Item Spawner Search Box](crispy_Item_Spawner_Search_Box/README.md)
 
@@ -64,7 +62,7 @@ Toggles repeated mask wiping at a configurable interval using Anomaly's existing
 
 <img src="https://github.com/user-attachments/assets/8fdb6c95-32d0-40cf-aa86-6789292daf8b" alt="Automatic mask wiping toggle" width="900" />
 
-<img src="https://github.com/user-attachments/assets/38f52d4d-89e3-48a0-9f2e-feda9a6b4339" alt="Automatic mask wiping MCM settings" width="900" />
+<!-- <img src="https://github.com/user-attachments/assets/38f52d4d-89e3-48a0-9f2e-feda9a6b4339" alt="Automatic mask wiping MCM settings" width="900" /> -->
 
 ### [AUGmented AUG A1 3DSS Patch](crispy_AUGmented_Aug_A1_3DSS/README.md)
 
@@ -72,15 +70,16 @@ Toggles repeated mask wiping at a configurable interval using Anomaly's existing
 
 Adapts the AUG A1 (`wpn_aug`) for Shader 3D Scopes using a replacement HUD model, reticle texture and DLTX configuration overrides.
 
-<img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" />
+<!-- <img src="https://github.com/user-attachments/assets/e3e4e487-36bb-471d-a5a4-45c24e891545" alt="AUG A1 with Shader 3D Scopes" width="900" /> -->
 
 ### [Load Ready Lite](crispy_Load_Ready_lite/README.md)
 
 **Version:** `1.0.0.0`
 
-Plays one notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
+Plays a notification sound when the loading-screen key prompt appears, so you can hear when loading is ready.
 
-https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1
+<!--
+https://github.com/user-attachments/assets/ca429974-a2c6-40aa-8442-32b78e30d1e1 -->
 
 ### [MCM Remembers Last Tab + Custom Mod Categories Compatibility Patch](crispy_MCM_Remembers_Last_Tab_CMC_Patch/README.md)
 
@@ -92,13 +91,12 @@ Custom Mod Categories v1.1.1 compatibility for MCM Remembers Last Tab v1.2.
 
 **Version:** `1.0.0.0`
 
-Combines Back and Forth button positioning and Custom Mod Categories dropdown positioning in one MCM menu with two tabs. Disable both former standalone position patches when enabling this combined addon.
+Combines Back and Forth button positioning and Custom Mod Categories dropdown positioning in one MCM menu with two tabs.
 
-The screenshots below show the original standalone controls, now grouped under MCM UI Tweaks.
-
+<!--
 <img src="https://github.com/user-attachments/assets/3848a52b-f745-447b-8aae-19f334947130" alt="Back and Forth button position settings" width="900" />
 
-<img src="https://github.com/user-attachments/assets/d5e4ee85-4fc2-4d3d-86ec-c3945e3053f3" alt="Custom Mod Categories dropdown position settings" width="900" />
+<img src="https://github.com/user-attachments/assets/d5e4ee85-4fc2-4d3d-86ec-c3945e3053f3" alt="Custom Mod Categories dropdown position settings" width="900" /> -->
 
 ### [Fatal Error + Milspec PDA MCM Text String Patch](crispy_Fatal_Error_PDA_Milspec_MCM_Fix/README.md)
 
@@ -106,7 +104,8 @@ The screenshots below show the original standalone controls, now grouped under M
 
 Fixes missing MCM text and improves wording for Fatal Error and Milspec PDA.
 
-<img src="https://github.com/user-attachments/assets/ff554476-65f3-45ba-854a-e754bc4f5ce2" alt="Corrected Fatal Error and Milspec PDA MCM text" width="900" />
+<!--
+<img src="https://github.com/user-attachments/assets/ff554476-65f3-45ba-854a-e754bc4f5ce2" alt="Corrected Fatal Error and Milspec PDA MCM text" width="900" /> -->
 
 ### [Pizza's Ultimate Sight Selection for Anomaly Magnifier MCM Text Patch](crispy_PUSSy_Magnifier_MCM_Text_Patch/README.md)
 
@@ -114,7 +113,8 @@ Fixes missing MCM text and improves wording for Fatal Error and Milspec PDA.
 
 Adds missing English and Russian MCM strings for the magnifier script.
 
-<img src="https://github.com/user-attachments/assets/63336ca8-6859-47f3-8452-2ee2dd07568b" alt="Magnifier MCM settings with restored text" width="900" />
+<!--
+<img src="https://github.com/user-attachments/assets/63336ca8-6859-47f3-8452-2ee2dd07568b" alt="Magnifier MCM settings with restored text" width="900" /> -->
 
 ### [Sota UI Rework MAS DevKit Ultrawide Patch](crispy_Sota_UI_Rework_MAS_DevKit_Ultrawide_Patch/README.md)
 
@@ -122,27 +122,31 @@ Adds missing English and Russian MCM strings for the magnifier script.
 
 Adjusts the layout on the draggable HUD editor for ultrawide displays.
 
-<img src="https://github.com/user-attachments/assets/1219366c-9ea4-4da9-a24f-fb91b4b8195a" alt="Ultrawide MAS DevKit HUD editor layout" width="900" />
+<!--
+<img src="https://github.com/user-attachments/assets/1219366c-9ea4-4da9-a24f-fb91b4b8195a" alt="Ultrawide MAS DevKit HUD editor layout" width="900" /> -->
 
 ### [NiS XML and Faction Relations Fix](crispy_NiS_xml_fix/README.md)
 
 **Version:** `1.0.0.0`
 
-Repairs malformed faction-relations bullets at runtime and includes replacement English ammo, glowstick, and medical item string tables. These full string-table files can conflict with other localization mods.
+Repairs malformed faction-relations bullets at runtime and includes replacement English ammo, glowstick, and medical item string tables. <br> These full string-table files can conflict with other localization mods.
 
-<img src="https://github.com/user-attachments/assets/b93af64d-8685-4f5d-9516-2cf765f14060" alt="NiS Bullet Fix" width="900" />
+<!--
+<img src="https://github.com/user-attachments/assets/b93af64d-8685-4f5d-9516-2cf765f14060" alt="NiS Bullet Fix" width="900" /> -->
 
 ### [Vanilla Options Script Improvements](crispy_Options_script_improvements_Vanilla/README.md)
 
 **Version:** `1.0.0.0`
 
-Replaces Anomaly's vanilla options-menu script with adjusted slider limits and finer control, plus a runtime label change identifying the expanded carry-weight slider.
+Replaces Anomaly's vanilla options-menu script with adjusted slider limits and finer control.
 
+<!--
 <img src="https://github.com/user-attachments/assets/77e04ddd-3f28-43ff-afeb-c9d6262b78c0" alt="Options menu audio controls" width="900" />
 
-<img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" />
+<img src="https://github.com/user-attachments/assets/c8af0676-b16d-4d45-865a-49d409bd4022" alt="Options menu sensitivity controls" width="900" /> -->
 
 ## Third-party content
+
 The reuse statement below applies to the author's contributions and does not override third-party terms.
 
 ---

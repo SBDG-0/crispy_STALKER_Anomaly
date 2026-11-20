@@ -42,7 +42,7 @@ Configure through the normal game options menu; there is no separate MCM page.
 
 ## Installation
 
-Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements. To build an archive, use the repository packaging workflow. ZIP roots contain only `meta.ini` and `gamedata/`; README files are excluded at every depth. Disable the mod in MO2 to remove its files.
+Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the mod root, then enable it alongside its requirements.  Disable the mod in MO2 to remove its files.
 
 ---
 

@@ -59,8 +59,6 @@ Install this folder as a separate mod in Mod Organizer 2, with `gamedata` at the
 
 After updating, restart the game and reopen the new-game faction-selection screen. Use the small Randomize button on the money row to change only the character name; the original main Randomize button keeps its normal behavior.
 
-For a distributable archive, use the repository packaging workflow. The ZIP root must contain only `meta.ini` and `gamedata/`, without a containing project folder or README files.
-
 ## Layout change notes
 
 - Replaced the original inline button, which reduced the name field width, with a button on the money row.
